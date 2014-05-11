@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<settings>
+	<category label="31010"> <!-- Setup -->
+    	<setting id="update_on_startup" type="bool" label="31011" visible="false" default="false" />
+		<setting id="smart_automation" type="bool" label="31013" default="false" visible="false"/>
+		<setting id="telldusSource" type="labelenum" label="31012" values="Telldus Live!|Local tdtool" default="Telldus Live!" />
+		<setting type="sep" />
+
+		<!-- Telldus Live -->
+    	<setting id="public_key" type="text" visible="false" default="MOE0OATHIASWOATIUXLUPO2TROUYOUNO" />
+    	<setting id="private_key" type="text" visible="false" default="TRLEXIUVIEXIABOESTIAPOE3LUTIAWLE" />
+
+    	<setting id="username" type="text" visible="false" default="" />
+    	<setting id="password" type="text" visible="false" default="" />
+
+		<setting id="telldus_live_authenticated" type="bool" visible="false" default="false" />
+		<setting id="telldus_live_confirmed" type="bool" visible="false" default="false" />
+		<setting id="telldus_live_authenticate" type="action" label="31021" visible="eq(-8,0)" enable="eq(-2,false)" action="RunScript($CWD/resources/lib/deviceCtrl.py,TELLDUS_LIVE_AUTHENTICATE)" />
+		<setting id="telldus_live_confirm" type="action" label="31022" visible="eq(-9,0)" enable="eq(-3,true)+eq(-2,false)" action="RunScript($CWD/resources/lib/deviceCtrl.py,TELLDUS_LIVE_CONFIRM)" />
+		<setting id="init_devices_live" type="action" label="31001" visible="eq(-10,0)" enable="eq(-3,true)" action="RunScript($CWD/resources/lib/deviceCtrl.py,TELLDUS_LIVE_INIT)" />
+
+		<!-- Local tdtool -->
+		<setting id="telldusExe" type="file" label="31030" visible="eq(-11,1)" default="c:\Program Files (x86)\Telldus\tdtool.exe" />
+		<setting id="init_devices_local" type="action" label="31001" visible="eq(-12,1)" action="RunScript($CWD/resources/lib/deviceCtrl.py,TELLDUS_LOCAL_INIT)" />
+		
+	</category>
+
+	<category label="31050"><!-- Advanced -->
+
+		<setting id="telldusSource" type="text" visible="false" />
+		<setting id="resetTelldusLive" type="action" visible="eq(-1,Telldus Live!)" label="31056" action="RunScript($CWD/resources/lib/deviceCtrl.py,TELLDUS_LIVE_RESET)" />
+
+		<!-- Debugging -->
+		<setting id="terraStickDebug" label="31055" type="bool" visible="true" default="false" />
+
+		<!-- Number of devices -->
+		<setting id="deviceCount" label="31051" type="labelenum" values="0|1|2|3|4|5|6|7|8" visible="true" default="0" />
+
+		<setting id="ID0" label="31081" type="number" visible="gt(-1,0)" />
+		<setting id="name0" label="31053" type="text" visible="gt(-2,0)" />
+		<setting id="val0" type="text" visible="false" />
+		<setting id="type0" label="31054" type="labelenum" values="SWITCH|DIMMER" visible="gt(-4,0)" />
+
+		<setting type="sep" visible="gt(-5,1)" />
+		<setting id="ID1" label="31082" type="number" visible="gt(-6,1)" />
+		<setting id="name1" label="31053" type="text" visible="gt(-7,1)" />
+		<setting id="val1" type="text" visible="false" />
+		<setting id="type1" label="31054" type="labelenum" values="SWITCH|DIMMER" visible="gt(-9,1)" />
+
+		<setting type="sep" visible="gt(-10,2)" />
+		<setting id="ID2" label="31083" type="number" visible="gt(-11,2)" />
+		<setting id="name2" label="31053" type="text" visible="gt(-12,2)" />
+		<setting id="val2" type="text" visible="false" />
+		<setting id="type2" label="31054" type="labelenum" values="SWITCH|DIMMER" visible="gt(-14,2)" />
+
+		<setting type="sep" visible="gt(-15,3)" />
+		<setting id="ID3" label="31084" type="number" visible="gt(-16,3)" />
+		<setting id="name3" label="31053" type="text" visible="gt(-17,3)" />
+		<setting id="val3" type="text" visible="false" />
+		<setting id="type3" label="31054" type="labelenum" values="SWITCH|DIMMER" visible="gt(-19,3)" />
+
+		<setting type="sep" visible="gt(-20,4)" />
+		<setting id="ID4" label="31085" type="number" visible="gt(-21,4)" />
+		<setting id="name4" label="31053" type="text" visible="gt(-22,4)" />
+		<setting id="val4" type="text" visible="false" />
+		<setting id="type4" label="31054" type="labelenum" values="SWITCH|DIMMER" visible="gt(-24,4)" />
+
+		<setting type="sep" visible="gt(-25,5)" />
+		<setting id="ID5" label="31086" type="number" visible="gt(-26,5)" />
+		<setting id="name5" label="31053" type="text" visible="gt(-27,5)" />
+		<setting id="val5" type="text" visible="false" />
+		<setting id="type5" label="31054" type="labelenum" values="SWITCH|DIMMER" visible="gt(-29,5)" />
+
+		<setting type="sep" visible="gt(-30,6)" />
+		<setting id="ID6" label="31087" type="number" visible="gt(-31,6)" />
+		<setting id="name6" label="31053" type="text" visible="gt(-32,6)" />
+		<setting id="val6" label="31053" type="text" visible="false" />
+		<setting id="type6" label="31054" type="labelenum" values="SWITCH|DIMMER" visible="gt(-34,6)" />
+
+		<setting type="sep" visible="gt(-35,7)" />
+		<setting id="ID7" label="31088" type="number" visible="gt(-36,7)" />
+		<setting id="name7" label="31053" type="text" visible="gt(-37,7)" />
+		<setting id="val7" type="text" visible="false" />
+		<setting id="type7" label="31054" type="labelenum" values="SWITCH|DIMMER" visible="gt(-39,7)" />
+
+	</category>
+	
+	<category label="31060"> <!-- Playing -->
+		<setting id="deviceCount" type="text" visible="false" />
+		<setting id="type0" type="text" visible="false" />
+		<setting id="automation_playing_ID0" type="bool" label="31071" visible="gt(-2,0)" default="false" />
+		<setting id="automation_playing_switch_ID0" type="bool" label="31061" visible="eq(-2,SWITCH) + gt(-3,0)" enable="eq(-1,true)" default="false" />
+		<setting id="automation_playing_dimmer_ID0" type="slider" label="31061" visible="eq(-3,DIMMER) + gt(-4,0)" enable="eq(-2,true)" range="0,32,255" option="int" default="0" />
+		<setting type="sep" visible="gt(-5,1)" />
+		<setting id="type1" type="text" visible="false" />
+		<setting id="automation_playing_ID1" type="bool" label="31072" visible="gt(-7,1)" default="false" />
+		<setting id="automation_playing_switch_ID1" type="bool" label="31062" visible="eq(-2,SWITCH) + gt(-8,1)" enable="eq(-1,true)" default="false" />
+		<setting id="automation_playing_dimmer_ID1" type="slider" label="31062" visible="eq(-3,DIMMER) + gt(-9,1)" enable="eq(-2,true)" range="0,32,255" option="int" default="0" />
+		<setting type="sep" visible="gt(-10,2)" />
+		<setting id="type2" type="text" visible="false" />
+		<setting id="automation_playing_ID2" type="bool" label="31073" visible="gt(-12,2)" default="false" />
+		<setting id="automation_playing_switch_ID2" type="bool" label="31063" visible="eq(-2,SWITCH) + gt(-13,2)" enable="eq(-1,true)" default="false" />
+		<setting id="automation_playing_dimmer_ID2" type="slider" label="31063" visible="eq(-3,DIMMER) + gt(-14,2)" enable="eq(-2,true)" range="0,32,255" option="int" default="0" />
+		<setting type="sep" visible="gt(-15,3)" />
+		<setting id="type3" type="text" visible="false" />
+		<setting id="automation_playing_ID3" type="bool" label="31074" visible="gt(-17,3)" default="false" />
+		<setting id="automation_playing_switch_ID3" type="bool" label="31064" visible="eq(-2,SWITCH) + gt(-18,3)" enable="eq(-1,true)" default="false" />
+		<setting id="automation_playing_dimmer_ID3" type="slider" label="31064" visible="eq(-3,DIMMER) + gt(-19,3)" enable="eq(-2,true)" range="0,32,255" option="int" default="0" />
+		<setting type="sep" visible="gt(-20,4)" />
+		<setting id="type4" type="text" visible="false" />
+		<setting id="automation_playing_ID4" type="bool" label="31075" visible="gt(-22,4)" default="false" />
+		<setting id="automation_playing_switch_ID4" type="bool" label="31065" visible="eq(-2,SWITCH) + gt(-23,4)" enable="eq(-1,true)" default="false" />
+		<setting id="automation_playing_dimmer_ID4" type="slider" label="31065" visible="eq(-3,DIMMER) + gt(-24,4)" enable="eq(-2,true)" range="0,32,255" option="int" default="0" />
+		<setting type="sep" visible="gt(-25,5)" />
+		<setting id="type5" type="text" visible="false" />
+		<setting id="automation_playing_ID5" type="bool" label="31076" visible="gt(-27,5)" default="false" />
+		<setting id="automation_playing_switch_ID5" type="bool" label="31066" visible="eq(-2,SWITCH) + gt(-28,5)" enable="eq(-1,true)" default="false" />
+		<setting id="automation_playing_dimmer_ID5" type="slider" label="31066" visible="eq(-3,DIMMER) + gt(-29,5)" enable="eq(-2,true)" range="0,32,255" option="int" default="0" />
+		<setting type="sep" visible="gt(-30,6)" />
+		<setting id="type6" type="text" visible="false" />
+		<setting id="automation_playing_ID6" type="bool" label="31077" visible="gt(-32,6)" default="false" />
+		<setting id="automation_playing_switch_ID6" type="bool" label="31067" visible="eq(-2,SWITCH) + gt(-33,6)" enable="eq(-1,true)" default="false" />
+		<setting id="automation_playing_dimmer_ID6" type="slider" label="31067" visible="eq(-3,DIMMER) + gt(-34,6)" enable="eq(-2,true)" range="0,32,255" option="int" default="0" />
+		<setting type="sep" visible="gt(-35,7)" />
+		<setting id="type7" type="text" visible="false" />
+		<setting id="automation_playing_ID7" type="bool" label="31078" visible="gt(-37,7)" default="false" />
+		<setting id="automation_playing_switch_ID7" type="bool" label="31068" visible="eq(-2,SWITCH) + gt(-38,7)" enable="eq(-1,true)" default="false" />
+		<setting id="automation_playing_dimmer_ID7" type="slider" label="31068" visible="eq(-3,DIMMER) + gt(-39,7)" enable="eq(-2,true)" range="0,32,255" option="int" default="0" />
+		<setting id="automation_playing_no_devices" type="text" label="31090" visible="eq(-40,0)" enable="false" />
+	</category>	
+	<category label="31070"> <!-- Paused -->
+		<setting id="deviceCount" type="text" visible="false" />
+		<setting id="type0" type="text" visible="false" />
+		<setting id="automation_paused_ID0" type="bool" label="31071" visible="gt(-2,0)" default="false" />
+		<setting id="automation_paused_switch_ID0" type="bool" label="31061" visible="eq(-2,SWITCH) + gt(-3,0)" enable="eq(-1,true)" default="0" />
+		<setting id="automation_paused_dimmer_ID0" type="slider" label="31061" visible="eq(-3,DIMMER) + gt(-4,0)" enable="eq(-2,true)" range="0,32,255" option="int" default="0" />
+		<setting type="sep" visible="gt(-5,1)" />
+		<setting id="type1" type="text" visible="false" />
+		<setting id="automation_paused_ID1" type="bool" label="31072" visible="gt(-7,1)" default="false" />
+		<setting id="automation_paused_switch_ID1" type="bool" label="31062" visible="eq(-2,SWITCH) + gt(-8,1)" enable="eq(-1,true)" default="0" />
+		<setting id="automation_paused_dimmer_ID1" type="slider" label="31062" visible="eq(-3,DIMMER) + gt(-9,1)" enable="eq(-2,true)" range="0,32,255" option="int" default="0" />
+		<setting type="sep" visible="gt(-10,2)" />
+		<setting id="type2" type="text" visible="false" />
+		<setting id="automation_paused_ID2" type="bool" label="31073" visible="gt(-12,2)" default="false" />
+		<setting id="automation_paused_switch_ID2" type="bool" label="31063" visible="eq(-2,SWITCH) + gt(-13,2)" enable="eq(-1,true)" default="0" />
+		<setting id="automation_paused_dimmer_ID2" type="slider" label="31063" visible="eq(-3,DIMMER) + gt(-14,2)" enable="eq(-2,true)" range="0,32,255" option="int" default="0" />
+		<setting type="sep" visible="gt(-15,3)" />
+		<setting id="type3" type="text" visible="false" />
+		<setting id="automation_paused_ID3" type="bool" label="31074" visible="gt(-17,3)" default="false" />
+		<setting id="automation_paused_switch_ID3" type="bool" label="31064" visible="eq(-2,SWITCH) + gt(-18,3)" enable="eq(-1,true)" default="0" />
+		<setting id="automation_paused_dimmer_ID3" type="slider" label="31064" visible="eq(-3,DIMMER) + gt(-19,3)" enable="eq(-2,true)" range="0,32,255" option="int" default="0" />
+		<setting type="sep" visible="gt(-20,4)" />
+		<setting id="type4" type="text" visible="false" />
+		<setting id="automation_paused_ID4" type="bool" label="31075" visible="gt(-22,4)" default="false" />
+		<setting id="automation_paused_switch_ID4" type="bool" label="31065" visible="eq(-2,SWITCH) + gt(-23,4)" enable="eq(-1,true)" default="0" />
+		<setting id="automation_paused_dimmer_ID4" type="slider" label="31065" visible="eq(-3,DIMMER) + gt(-24,4)" enable="eq(-2,true)" range="0,32,255" option="int" default="0" />
+		<setting type="sep" visible="gt(-25,5)" />
+		<setting id="type5" type="text" visible="false" />
+		<setting id="automation_paused_ID5" type="bool" label="31076" visible="gt(-27,5)" default="false" />
+		<setting id="automation_paused_switch_ID5" type="bool" label="31066" visible="eq(-2,SWITCH) + gt(-28,5)" enable="eq(-1,true)" default="0" />
+		<setting id="automation_paused_dimmer_ID5" type="slider" label="31066" visible="eq(-3,DIMMER) + gt(-29,5)" enable="eq(-2,true)" range="0,32,255" option="int" default="0" />
+		<setting type="sep" visible="gt(-30,6)" />
+		<setting id="type6" type="text" visible="false" />
+		<setting id="automation_paused_ID6" type="bool" label="31077" visible="gt(-32,6)" default="false" />
+		<setting id="automation_paused_switch_ID6" type="bool" label="31067" visible="eq(-2,SWITCH) + gt(-33,6)" enable="eq(-1,true)" default="0" />
+		<setting id="automation_paused_dimmer_ID6" type="slider" label="31067" visible="eq(-3,DIMMER) + gt(-34,6)" enable="eq(-2,true)" range="0,32,255" option="int" default="0" />
+		<setting type="sep" visible="gt(-35,7)" />
+		<setting id="type7" type="text" visible="false" />
+		<setting id="automation_paused_ID7" type="bool" label="31078" visible="gt(-37,7)" default="false" />
+		<setting id="automation_paused_switch_ID7" type="bool" label="31068" visible="eq(-2,SWITCH) + gt(-38,7)" enable="eq(-1,true)" default="0" />
+		<setting id="automation_paused_dimmer_ID7" type="slider" label="31068" visible="eq(-3,DIMMER) + gt(-39,7)" enable="eq(-2,true)" range="0,32,255" option="int" default="0" />
+		<setting id="automation_playing_no_devices" type="text" label="31090" visible="eq(-40,0)" enable="false" />
+	</category>
+	<category label="31080"> <!-- Stopped -->
+		<setting id="deviceCount" type="text" visible="false" />
+		<setting id="type0" type="text" visible="false" />
+		<setting id="automation_stopped_ID0" type="bool" label="31071" visible="gt(-2,0)" default="false" />
+		<setting id="automation_stopped_switch_ID0" type="bool" label="31061" visible="eq(-2,SWITCH) + gt(-3,0)" enable="eq(-1,true)" default="0" />
+		<setting id="automation_stopped_dimmer_ID0" type="slider" label="31061" visible="eq(-3,DIMMER) + gt(-4,0)" enable="eq(-2,true)" range="0,32,255" option="int" default="0" />
+		<setting type="sep" visible="gt(-5,1)" />
+		<setting id="type1" type="text" visible="false" />
+		<setting id="automation_stopped_ID1" type="bool" label="31072" visible="gt(-7,1)" default="false" />
+		<setting id="automation_stopped_switch_ID1" type="bool" label="31062" visible="eq(-2,SWITCH) + gt(-8,1)" enable="eq(-1,true)" default="0" />
+		<setting id="automation_stopped_dimmer_ID1" type="slider" label="31062" visible="eq(-3,DIMMER) + gt(-9,1)" enable="eq(-2,true)" range="0,32,255" option="int" default="0" />
+		<setting type="sep" visible="gt(-10,2)" />
+		<setting id="type2" type="text" visible="false" />
+		<setting id="automation_stopped_ID2" type="bool" label="31073" visible="gt(-12,2)" default="false" />
+		<setting id="automation_stopped_switch_ID2" type="bool" label="31063" visible="eq(-2,SWITCH) + gt(-13,2)" enable="eq(-1,true)" default="0" />
+		<setting id="automation_stopped_dimmer_ID2" type="slider" label="31063" visible="eq(-3,DIMMER) + gt(-14,2)" enable="eq(-2,true)" range="0,32,255" option="int" default="0" />
+		<setting type="sep" visible="gt(-15,3)" />
+		<setting id="type3" type="text" visible="false" />
+		<setting id="automation_stopped_ID3" type="bool" label="31074" visible="gt(-17,3)" default="false" />
+		<setting id="automation_stopped_switch_ID3" type="bool" label="31064" visible="eq(-2,SWITCH) + gt(-18,3)" enable="eq(-1,true)" default="0" />
+		<setting id="automation_stopped_dimmer_ID3" type="slider" label="31064" visible="eq(-3,DIMMER) + gt(-19,3)" enable="eq(-2,true)" range="0,32,255" option="int" default="0" />
+		<setting type="sep" visible="gt(-20,4)" />
+		<setting id="type4" type="text" visible="false" />
+		<setting id="automation_stopped_ID4" type="bool" label="31075" visible="gt(-22,4)" default="false" />
+		<setting id="automation_stopped_switch_ID4" type="bool" label="31065" visible="eq(-2,SWITCH) + gt(-23,4)" enable="eq(-1,true)" default="0" />
+		<setting id="automation_stopped_dimmer_ID4" type="slider" label="31065" visible="eq(-3,DIMMER) + gt(-24,4)" enable="eq(-2,true)" range="0,32,255" option="int" default="0" />
+		<setting type="sep" visible="gt(-25,5)" />
+		<setting id="type5" type="text" visible="false" />
+		<setting id="automation_stopped_ID5" type="bool" label="31076" visible="gt(-27,5)" default="false" />
+		<setting id="automation_stopped_switch_ID5" type="bool" label="31066" visible="eq(-2,SWITCH) + gt(-28,5)" enable="eq(-1,true)" default="0" />
+		<setting id="automation_stopped_dimmer_ID5" type="slider" label="31066" visible="eq(-3,DIMMER) + gt(-29,5)" enable="eq(-2,true)" range="0,32,255" option="int" default="0" />
+		<setting type="sep" visible="gt(-30,6)" />
+		<setting id="type6" type="text" visible="false" />
+		<setting id="automation_stopped_ID6" type="bool" label="31077" visible="gt(-32,6)" default="false" />
+		<setting id="automation_stopped_switch_ID6" type="bool" label="31067" visible="eq(-2,SWITCH) + gt(-33,6)" enable="eq(-1,true)" default="0" />
+		<setting id="automation_stopped_dimmer_ID6" type="slider" label="31067" visible="eq(-3,DIMMER) + gt(-34,6)" enable="eq(-2,true)" range="0,32,255" option="int" default="0" />
+		<setting type="sep" visible="gt(-35,7)" />
+		<setting id="type7" type="text" visible="false" />
+		<setting id="automation_stopped_ID7" type="bool" label="31078" visible="gt(-37,7)" default="false" />
+		<setting id="automation_stopped_switch_ID7" type="bool" label="31068" visible="eq(-2,SWITCH) + gt(-38,7)" enable="eq(-1,true)" default="0" />
+		<setting id="automation_stopped_dimmer_ID7" type="slider" label="31068" visible="eq(-3,DIMMER) + gt(-39,7)" enable="eq(-2,true)" range="0,32,255" option="int" default="0" />
+		<setting id="automation_playing_no_devices" type="text" label="31090" visible="eq(-40,0)" enable="false" />
+	</category>
+	
+</settings>
