@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<strings>
+    <!-- Title -->
+	<string id="31000">terraStick</string>
+	<string id="31001">Get Telldus devices</string>
+
+    <!-- Setup -->
+	<string id="31010">Setup</string>
+	<string id="31011">Update devices on startup</string>
+	<string id="31012">Device source</string>
+	<string id="31013">Smart Playback automation</string>
+
+    <!-- Telldus Live -->
+	<string id="31020">Generate keys at http://api.telldus.com and enter them below</string>
+	<string id="31021">Setup Telldus Live!</string>
+	<string id="31022">Confirm account</string>
+
+    <!-- Local tdtool -->
+	<string id="31030">Path to tdtool</string>
+
+    <!-- Advanced -->
+	<string id="31050">Advanced</string>
+	<string id="31051">Number of devices</string>
+	<string id="31052">ID</string>
+	<string id="31053">Name</string>
+	<string id="31054">Type</string>
+	<string id="31055">Enable addon internal logging</string>
+	<string id="31056">Reset Telldus Live! authentication</string>
+
+	<!-- Automation -->
+	<string id="31060">Playing</string>
+	<string id="31061">Device #0</string>
+	<string id="31062">Device #1</string>
+	<string id="31063">Device #2</string>
+	<string id="31064">Device #3</string>
+	<string id="31065">Device #4</string>
+	<string id="31066">Device #5</string>
+	<string id="31067">Device #6</string>
+	<string id="31068">Device #7</string>
+	
+	<string id="31070">Paused</string>
+	<string id="31071">Automate device #0</string>
+	<string id="31072">Automate device #1</string>
+	<string id="31073">Automate device #2</string>
+	<string id="31074">Automate device #3</string>
+	<string id="31075">Automate device #4</string>
+	<string id="31076">Automate device #5</string>
+	<string id="31077">Automate device #6</string>
+	<string id="31078">Automate device #7</string>
+	
+	<string id="31080">Stopped</string>
+	<string id="31081">Device #0 ID</string>
+	<string id="31082">Device #1 ID</string>
+	<string id="31083">Device #2 ID</string>
+	<string id="31084">Device #3 ID</string>
+	<string id="31085">Device #4 ID</string>
+	<string id="31086">Device #5 ID</string>
+	<string id="31087">Device #6 ID</string>
+	<string id="31088">Device #7 ID</string>
+	
+	<string id="31090">There are no devices to automate</string>
+</strings>
