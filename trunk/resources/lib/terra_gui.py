@@ -6,11 +6,10 @@
 
 import os, sys
 import xbmcaddon, xbmc, xbmcgui
-import xlogger, tdtool, debug
+import xlogger, tdtool, debug, deviceCtrl
 from threading import Thread
 
-# self.devices	0:ID		1:name		2:actVal	3:type		4:controlID		5:newVal
-MAX_DEVICES = 8
+# self.devices	0:ID		1:name		2:actVal	3:type		4:newVal
 STEP_SIZE = 125
 
 TELLSTICK_TURNON = 1
@@ -27,8 +26,8 @@ __addonpath__    = __addon__.getAddonInfo('path')
 __addondir__     = xbmc.translatePath( __addon__.getAddonInfo('profile') )
 __addonicon__    = xbmc.translatePath('%s/icon.png' % __addonpath__ ).decode("utf-8")
 __localize__     = __addon__.getLocalizedString
-settings = xbmcaddon.Addon(id='plugin.program.terra')
 __img_path__   = xbmc.translatePath( os.path.join( __addonpath__, 'resources', 'skins', 'Default', 'media') )
+settings = xbmcaddon.Addon(id='plugin.program.terra')
 
 #global used to tell the worker thread the status of the window
 __windowopen__   = True
@@ -42,13 +41,14 @@ ACTION_MOVE_LEFT = 1
 ACTION_MOVE_RIGHT = 2
 ACTION_MOVE_UP = 3
 ACTION_MOVE_DOWN = 4
+ACTION_SELECT_ITEM = 7
 
 # create a global logger object and set the preamble
 tw = xlogger.inst
-tw.setPreamble ('[telldusinfo]')
+tw.setPreamble ('[terrainfo]')
 
 #this is the class for creating and populating the window 
-class TelldusInfoWindow(xbmcgui.WindowXMLDialog): 
+class TerraInfoWindow(xbmcgui.WindowXMLDialog): 
 
 	def __init__(self, *args, **kwargs):
 		tw.log('script already running, aborting subsequent run attempts', 'standard')
@@ -58,217 +58,208 @@ class TelldusInfoWindow(xbmcgui.WindowXMLDialog):
 		debug.log("onInit()")
 		if (int(settings.getSetting("deviceCount")) == 0):
 			self.message("No devices found", "Please configure the addon first.")
-		self.getDevices()
-		self.printControls()
-		self.applyNavigation()
+			self.close()
+		else:
+			self.getDevices()
+			self.printControls()
 
-		
+	def applyValue(self, ID, type, val):
+		debug.log("applyValue("+str(val)+", "+str(ID)+", "+str(type)+", "+str(val)+")")
+		if (type == "switch"):
+			if (val == "OFF"):
+				tdtool.doDevice(settings.getSetting("telldusSource"), ID, TELLSTICK_TURNOFF, 255)
+			else:
+				tdtool.doDevice(settings.getSetting("telldusSource"), ID, TELLSTICK_TURNON, 
+				0)
+		elif (type == "dimmer"):
+			tdtool.doDevice(settings.getSetting("telldusSource"), ID, TELLSTICK_DIM, int(round((int(val)*255)/1000)))
+
+
 	def onAction(self, action):
 		debug.log("onAction("+ str(action) +")")
-		if (action == ACTION_MOVE_RIGHT or action == ACTION_MOVE_LEFT):
-			if ( self.devices[self.curLine][3] == "DIMMER" ):
-				val = int(self.devices[self.curLine][5])
-				if(action == ACTION_MOVE_RIGHT):
-					if ( int(val) >= 1000 ):
-						val = 0 
-					else:
-						val +=STEP_SIZE
-				if(action == ACTION_MOVE_LEFT):
-					if ( int(val) <= 0 ):
-						val = 1000
-					else:
-						val -=STEP_SIZE
-				self.devices[self.curLine][5] = str(val)
-				self.getControl(210+self.curLine).setImage(__img_path__+'/'+str(val)+'_active.png')
-			elif ( self.devices[self.curLine][3] == "SWITCH" ):
-				if ( self.devices[self.curLine][5] == "ON" ):
-					self.getControl(210+self.curLine).setImage(__img_path__+'/off_active.png')
-					self.devices[self.curLine][5] = "OFF"
+
+		if (action == ACTION_MOVE_UP or action == ACTION_MOVE_DOWN):
+			if ( self.devices[self.curSel][3] == "dimmer" ):
+				val = int(self.devices[self.curSel][4])
+				if(action == ACTION_MOVE_UP):
+					if ( int(val) != 1000 ):
+						val += STEP_SIZE
+				if(action == ACTION_MOVE_DOWN):
+					if ( int(val) != 0 ):
+						val -= STEP_SIZE
+				self.devices[self.curSel][4] = str(val)
+				self.buttons[4].setImage(__img_path__+'/'+str(val)+'_active.png')
+			elif ( self.devices[self.curSel][3] == "switch" ):
+				if ( self.devices[self.curSel][4] == "ON" ):
+					self.buttons[4].setImage(__img_path__+'/off_active.png')
+					self.devices[self.curSel][4] = "OFF"
 				else:
-					self.getControl(210+self.curLine).setImage(__img_path__+'/on_active.png')
-					self.devices[self.curLine][5] = "ON"
-		elif (action == ACTION_MOVE_UP):
-			if (self.curLine > 0):
-				self.curLine -= 1
-				self.getControl(210+self.curLine+1).setImage(__img_path__+'/'+self.devices[self.curLine+1][2]+'.png')
-				self.getControl(210+self.curLine).setImage(__img_path__+'/'+self.devices[self.curLine][2]+'_active.png')
-				self.devices[self.curLine][5] = self.devices[self.curLine][2]
-				self.selector.setPosition(89, (self.curLine*75)+99)
-		elif (action == ACTION_MOVE_DOWN):
-			if (self.curLine < MAX_DEVICES):
-				self.curLine += 1
-				self.getControl(210+self.curLine-1).setImage(__img_path__+'/'+self.devices[self.curLine-1][2]+'.png')
-				self.getControl(210+self.curLine).setImage(__img_path__+'/'+self.devices[self.curLine][2]+'_active.png')
-				self.devices[self.curLine][5] = self.devices[self.curLine][2]
-				self.selector.setPosition(89, (self.curLine*75)+99)
+					self.buttons[4].setImage(__img_path__+'/on_active.png')
+					self.devices[self.curSel][4] = "ON"
+			if (settings.getSetting("quickMode") == "true"):
+				self.applyValue(self.devices[self.curSel][0], self.devices[self.curSel][3],  self.devices[self.curSel][4] )
+				self.devices[self.curSel][2] = self.devices[self.curSel][4]
+
+
+		elif (action == ACTION_MOVE_RIGHT):
+			self.carusel("right")
+
+		elif (action == ACTION_MOVE_LEFT):
+			self.carusel("left")
+
+		elif (action == ACTION_SELECT_ITEM):
+			if (settings.getSetting("quickMode") == "false"):
+				self.applyValue(self.devices[self.curSel][0], self.devices[self.curSel][3],  self.devices[self.curSel][4] )
+				self.devices[self.curSel][2] = self.devices[self.curSel][4]
+				self.printStatus()
+
 		elif (action == ACTION_PREVIOUS_MENU or action == ACTION_BACK or action == ACTION_HOME):
 			global __windowopen__
-			self.storeDevices()
 			__windowopen__ = False
 			self.close()
 
 
-	def onClick(self, controlId):
-		debug.log("onAction("+ str(controlId) +")")
-		for i in range(0,self.deviceCount):		
-			if ( str(controlId) == self.devices[i][4]):
-				self.devices[i][2] = self.devices[i][5]
-				break
-		if (self.devices[i][3] == "SWITCH"):
-			if (self.devices[self.curLine][2] == "ON"):
-				tdtool.doDevice(settings.getSetting("telldusSource"), self.devices[i][0], TELLSTICK_TURNON, 255)
-			else:
-				tdtool.doDevice(settings.getSetting("telldusSource"), self.devices[i][0], TELLSTICK_TURNOFF, 100)
-		elif (self.devices[i][3] == "DIMMER"):
-			tdtool.doDevice(settings.getSetting("telldusSource"), self.devices[i][0], TELLSTICK_DIM, int(round((int(self.devices[i][2])*255)/1000)))
-
-			
-	def onFocus(self, controlId):
-		debug.log("onAction("+ str(controlId) +")")
-
-
-	def applyNavigation(self):
-		debug.log("applyNavigation()")
-		self.curLine = 0
-		self.setFocus(self.buttons[self.curLine])		
-		if ( self.devices[self.curLine][3] == "SWITCH" ):
-			if ( self.devices[self.curLine][2] == "ON" ):
-				self.getControl(210+self.curLine).setImage(__img_path__+'/on_active.png')
-			else:
-				self.getControl(210+self.curLine).setImage(__img_path__+'/off_active.png')
-		elif ( self.devices[self.curLine][3] == "DIMMER" ):
-			self.getControl(210+self.curLine).setImage(__img_path__+'/'+self.devices[self.curLine][2]+'_active.png')
-		for i in range(0,self.deviceCount-1):
-			self.buttons[i].controlDown(self.buttons[(i+1)%10])
-			self.buttons[(i+1)%10].controlUp(self.buttons[i])
-
-
-	def printControls(self):
-		debug.log("printControls()")
-		self.labels = []
-		self.buttons = []
-		self.selector = xbmcgui.ControlImage(89, 99, 16, 32, __img_path__+'/selector.png')
-		self.addControl(self.selector)
-		for i in range(0,self.deviceCount):
-			self.labels.append(xbmcgui.ControlLabel(120, 78+(i*75), 400, 69, self.devices[i][1] ,alignment=4, font='font14', textColor='0xFFFFFFFF'))
-			self.addControl(self.labels[i])
-			if ( self.devices[i][3] == "SWITCH" ):
-				self.buttons.append(xbmcgui.ControlButton(34, 104+(i*75), 32, 32,'','',''))
-			else:
-				self.buttons.append(xbmcgui.ControlButton(34, 104+(i*75), 32, 32,'','',''))
-			self.addControl(self.buttons[i])
-			self.devices[i][4] = str(self.buttons[i].getId())
-			if ( self.devices[i][3] == "SWITCH" ):
-				if ( self.devices[i][2] == "ON" ):
-					self.getControl(210+i).setImage(__img_path__+'/on.png')
-				else:
-					self.getControl(210+i).setImage(__img_path__+'/off.png')
-			elif ( self.devices[i][3] == "DIMMER" ):
-				self.getControl(210+i).setImage(__img_path__+'/'+self.devices[i][2]+'.png')
-			self.devices[i][5] = self.devices[i][2]
-
-
-	def logDeviceStatus(self):
-		debug.log("logDeviceStatus()")	
-		if ( self.deviceCount == 0):
-			xbmc.log("-> no devices registered")
-		else:
-			for i in range(self.deviceCount):
-				xbmc.log("-> "+self.devices[i][0])
-				xbmc.log("-> "+self.devices[i][1])
-				xbmc.log("-> "+self.devices[i][2])
-				xbmc.log("-> "+self.devices[i][3])
-				xbmc.log("-> "+str(self.devices[i][4]))
-				xbmc.log("-> "+str(self.devices[i][5]))
-				xbmc.log(" ")
+#	def onClick(self, controlId):
+#		debug.log("onAction("+ str(controlId) +")")
 
 
 	def getDevices(self):
-		debug.log("getDevices()")	
-		self.deviceCount = int(settings.getSetting("deviceCount"))				
-		self.devices = [[0 for x in xrange(6)] for x in xrange(self.deviceCount)] 
-		for i in range(self.deviceCount):
-			id = "ID"+str(i)
-			name = "name"+str(i)
-			val = "val"+str(i)
-			type = "type"+str(i)
-			self.devices[i][0] = settings.getSetting(id)
-			self.devices[i][1] = settings.getSetting(name)
-			self.devices[i][2] = settings.getSetting(val)
-			self.devices[i][3] = settings.getSetting(type)
-			self.devices[i][5] = self.devices[i][2]
-			
-			if ( self.devices[i][3] == "SWITCH" ):	
-					if ( isNumber(self.devices[i][2]) == True ):
-						if ( int(self.devices[i][2]) >= (1000/2) ):
-							self.devices[i][2] = "ON"
-							settings.setSetting("ON", self.devices[i][2])
-						else:
-							self.devices[i][2] = "OFF"
-							settings.setSetting("OFF", self.devices[i][2])
-					elif (self.devices[i][2] == '' ):
-						self.devices[i][2] = "OFF"
-						settings.setSetting("OFF", self.devices[i][2])
-							
-			if ( self.devices[i][3] == "DIMMER" ):	
-				if ( self.devices[i][2] == "ON" ):
-					self.devices[i][2] = "1000"
-					settings.setSetting("1000", self.devices[i][2])
-				elif ( self.devices[i][2] == "OFF" ):
+		self.deviceCount = int(settings.getSetting("deviceCount"))
+		self.devices = [[0 for x in xrange(5)] for x in xrange(self.deviceCount)]
+		for i in xrange(self.deviceCount):
+			# self.devices	0:ID		1:name		2:actVal	3:type		4:newVal
+			self.devices[i][0]=settings.getSetting("dev"+str(i)+"ID")
+			self.devices[i][1]=settings.getSetting("dev"+str(i)+"Name")
+			self.devices[i][2]=settings.getSetting("dev"+str(i)+"Val")
+			self.devices[i][3]=settings.getSetting("dev"+str(i)+"Type")
+
+			#check if devices have updated values applied outside addon
+			if (settings.getSetting("telldusSource") == "Local tdtool"):
+				deviceCtrl.terraLocalUpdate()
+			#elif (settings.getSetting("telldusSource") == "Telldus Live!"):
+			#	deviceCtrl.telldusLiveUpdate()
+
+			#fiddling with settings if the device has changed type with a non updated value
+			if (self.devices[i][3] == "switch"):
+				if isNumber(self.devices[i][2]):
+					self.devices[i][2] = "ON"
+			if (self.devices[i][3] == "dimmer"):
+				if self.devices[i][2] == "OFF":
 					self.devices[i][2] = "0"
-					settings.setSetting("0", self.devices[i][2])
+				elif self.devices[i][2] == "OFF":
+					self.devices[i][2] = "1000"
+
+			# set the right current value
+			self.devices[i][4]=self.devices[i][2]
 
 
-	def storeDevices(self):
-		debug.log("storeDevices()")	
-		for i in range(self.deviceCount):
-			id = "ID"+str(i)
-			name = "name"+str(i)
-			val = "val"+str(i)
-			type = "type"+str(i)
-			settings.setSetting(id, str(self.devices[i][0]) )
-			settings.setSetting(name, str(self.devices[i][1]) )
-			settings.setSetting(val, str(self.devices[i][2]) )
-			settings.setSetting(type, str(self.devices[i][3]) )
+	def printControls(self):
+		self.labels = []
+		self.buttons = []
+		self.selector = []
+		
+		if self.deviceCount < 7:
+			self.range=self.deviceCount
+		else:
+			self.range = 7
+		
+		if self.deviceCount==1 or self.deviceCount==2:
+			self.offset = 3
+			self.curSel = 0
+		elif self.deviceCount==3 or self.deviceCount==4:
+			self.offset = 2
+			self.curSel = 1
+		elif self.deviceCount==5 or self.deviceCount==6:
+			self.offset = 1
+			self.curSel = 2
+		else:
+			self.offset= 0
+			self.curSel = 3 
 
-
-	def initDevices(self):
-		debug.log("initDevices()")	
-		i = 0
-		self.deviceCount = 0
-		self.devices = []
-		devices = tdtool.listDevices()
-		for i in range(len(devices)):
-			if (i == 0):
-				self.deviceCount=int(devices[i])
-				settings.setSetting("deviceCount", str(self.deviceCount))
-				self.devices = [[0 for x in xrange(6)] for x in xrange(self.deviceCount)] 
+		# initialize empty controls and labels
+		for i in xrange(9):
+			if i == 0:
+				self.labels.append(xbmcgui.ControlLabel(-110,265, 300, 50, '' ,alignment=0, font='font14', textColor='0xFFFFFFFF',disabledColor='0xFFFF3300',angle=45))
+				self.addControl(self.labels[i])
+				self.buttons.append(xbmcgui.ControlImage(-70, 300, 100, 100,''))
+				self.addControl(self.buttons[i])
 			else:
-				cols = devices[i].split('\t')
-				id = "ID"+str(i-1)
-				name = "name"+str(i-1)
-				val = "val"+str(i-1)
-				type = "type"+str(i-1)
-				settings.setSetting(id, cols[0])
-				settings.setSetting(name, cols[1])
-				settings.setSetting(val, cols[2].rstrip('\n'))
-				if "DIMMED" in settings.getSetting(val):
-					settings.setSetting(type, "DIMMER")
-					settings.setSetting(val, "500")
-				else:
-					settings.setSetting(type, "SWITCH")
-		for i in range(self.deviceCount):
-			id = "ID"+str(i)
-			val = "val"+str(i)
-			type = "type"+str(i)
-			if "SWITCH" in settings.getSetting(type):
-				if "ON" in settings.getSetting(val):
-					val = "255"
-				else:
-					val = "0"
-				output = tdtool.doMethod(settings.getSetting(id), TELLSTICK_DIM, val)
-				if "success" in output:
-					settings.setSetting(type, "DIMMER")
+				self.labels.append(xbmcgui.ControlLabel(90+((i-1)*180),265, 300, 50, '' ,alignment=0, font='font14', textColor='0xFFFFFFFF',disabledColor='0xFFFF3300',angle=45))
+				self.addControl(self.labels[i])
+				self.buttons.append(xbmcgui.ControlImage(50+((i-1)*180), 300, 100, 100,''))
+				self.addControl(self.buttons[i])
+
+		# populate initial controls and labels
+		for i in range(self.range):
+			self.labels[i+1+self.offset].setLabel(str(self.devices[i][1]))
+			self.buttons[i+1+self.offset].setImage(__img_path__+'/'+str(self.devices[i][2])+'.png')
+		self.buttons[4].setImage(__img_path__+'/'+str(self.devices[self.curSel][2])+'_active.png')
+
+		# add selector
+		self.selector.append(xbmcgui.ControlImage(580, 390, 100, 20,''))
+		self.addControl(self.selector[0])
+
+
+	def printStatus(self):
+			xbmc.log("--> deviceCount:" + str(self.deviceCount) + " curSel:" + str(self.curSel) + " offset:" + str(self.offset) +" range:" + str(self.range) )
+			for i in xrange(0, self.deviceCount):
+				# self.devices	0:ID		1:name		2:actVal	3:type		4:newVal
+				xbmc.log("--> dev" + str(i) + " - name: " +str(self.devices[i][1]) + ", type: " + str(self.devices[i][3]) + ", ID: " + str(self.devices[i][0]) + ", value: " + str(self.devices[i][2]) ) 
+
+
+	def findAvailableGuiObject(self):
+		for i in xrange(0, 10):
+			if 210+i not in [row[0] for row in self.guiLink]:
+				return 210+i
+
+	
+	def carusel(self, direction):
+		
+		# set the right actual value
+		self.devices[self.curSel][4] = self.devices[self.curSel][2]
+
+		# clear all objects if not at the bookends
+		if (self.curSel!=0 and direction=="left") or (self.curSel!=(self.deviceCount-1) and direction=="right"):
+			for i in xrange(1,8):
+				self.labels[i].setLabel('')
+				self.buttons[i].setImage('')
+		
+		# move left
+		if (direction == "left" and self.curSel>=1):
+			# move the sticks on the left
+			if self.curSel == 3 or self.curSel == 2 or self.curSel == 1:
+				self.offset += 1	
+			# adjust the range
+			if self.curSel<4 and self.deviceCount>4:
+				self.range -= 1
+			if (self.deviceCount-self.curSel)<4 and self.deviceCount>4:
+				self.range += 1
+			# move the carusel
+			self.curSel -= 1
+				
+		# move	right
+		elif (direction == "right" and self.curSel<(self.deviceCount-1)):
+			# move the sticks on the left
+			if self.curSel == 2 or self.curSel == 1 or self.curSel == 0:
+				self.offset -= 1
+			# adjust the range
+			if self.curSel<3 and self.deviceCount>4:
+				self.range += 1
+			if (self.deviceCount-self.curSel)<5 and self.deviceCount>4:
+				self.range -= 1
+			# move the carusel
+			self.curSel += 1
+
+		# print labels and controls
+		for i in range(self.range):
+			self.labels[self.offset+i+1].setLabel(str(self.devices[self.curSel+i-(3-self.offset)][1]))
+			self.buttons[self.offset+i+1].setImage(__img_path__+'/'+str(self.devices[self.curSel+i-(3-self.offset)][2])+'.png')
+		#set active
+		self.buttons[4].setImage(__img_path__+'/'+str(self.devices[self.curSel][2])+'_active.png')
+
+	
+	def onFocus(self, controlId):
+		debug.log("onFocus("+ str(controlId) +")")
 
 
 	def message(self,title, message):
@@ -294,13 +285,13 @@ elif sys.platform == 'windows':
 	pass
 
 #run the script
-if ( xbmcgui.Window(winID).getProperty("telldus.running") == "true" ):
+if ( xbmcgui.Window(winID).getProperty("terra.running") == "true" ):
 	tw.log('script already running, aborting subsequent run attempts', 'standard')
 else:
-	xbmcgui.Window(winID).setProperty( "telldus.running",  "true" )
+	xbmcgui.Window(winID).setProperty( "terra.running",  "true" )
 	tw.log('attempting to create main script object', 'verbose')
-	w = TelldusInfoWindow("telldus.xml", __addonpath__, "Default")
+	w = TerraInfoWindow("terra.xml", __addonpath__, "Default")
 	w.doModal()
 	del w
 	del tw
-	xbmcgui.Window(winID).setProperty( "telldus.running",  "false" )
+	xbmcgui.Window(winID).setProperty( "terra.running",  "false" )
