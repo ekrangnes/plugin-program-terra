@@ -1,2 +1,6 @@
+0.1.0
+The new layout supports up to 32 units as well as new icons and graphics. Tested with XBMC 13.0 beta 1 on Ubuntu 13.10, OS X Mavericks and Windows 7 - though local tdtool is broken on Mac OSX & Ubuntu Linux. This can likely be fixed with effort and time. Telldus Live! works on all platforms. Automation is removed due to engine restructuring. This will have to be re-done at a later stage together with scenario support.
+
+
 0.0.1
 Initial release. There is a limitation of 8 devices total; the first 8 returned is used. Look in the xbmc.log and the advanced tab in the settings if you'd like to shuffle things around. Excess device information should be found in the xbmc log. Not to thrilled with the extensive initial authentication that is needed for live. But sorry; that's out of my hands. Thanks to all of you who motivated me to put this together and provided bits and pieces; foremost rbiez for his telldus automation script. Props to www.vectortemplates.com for providing a great vector image for the icon. 

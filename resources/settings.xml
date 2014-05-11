@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <settings>
 	<category label="31010"> <!-- Setup -->
-    	<setting id="update_on_startup" type="bool" label="31011" visible="false" default="false" />
-		<setting id="smart_automation" type="bool" label="31013" default="false" visible="false"/>
+		<!-- setting id="telldusSource" type="labelenum" label="31012" values="Telldus Live!|Local tdtool|Dummy" default="Telldus Live!" /-->
 		<setting id="telldusSource" type="labelenum" label="31012" values="Telldus Live!|Local tdtool" default="Telldus Live!" />
 		<setting type="sep" />
 
@@ -15,204 +14,501 @@
 
 		<setting id="telldus_live_authenticated" type="bool" visible="false" default="false" />
 		<setting id="telldus_live_confirmed" type="bool" visible="false" default="false" />
-		<setting id="telldus_live_authenticate" type="action" label="31021" visible="eq(-8,0)" enable="eq(-2,false)" action="RunScript($CWD/resources/lib/deviceCtrl.py,TELLDUS_LIVE_AUTHENTICATE)" />
-		<setting id="telldus_live_confirm" type="action" label="31022" visible="eq(-9,0)" enable="eq(-3,true)+eq(-2,false)" action="RunScript($CWD/resources/lib/deviceCtrl.py,TELLDUS_LIVE_CONFIRM)" />
+		<setting id="telldus_live_authenticate" type="action" label="31014" visible="eq(-8,0)" enable="eq(-2,false)" action="RunScript($CWD/resources/lib/deviceCtrl.py,TELLDUS_LIVE_AUTHENTICATE)" />
+		<setting id="telldus_live_confirm" type="action" label="31015" visible="eq(-9,0)" enable="eq(-3,true)+eq(-2,false)" action="RunScript($CWD/resources/lib/deviceCtrl.py,TELLDUS_LIVE_CONFIRM)" />
 		<setting id="init_devices_live" type="action" label="31001" visible="eq(-10,0)" enable="eq(-3,true)" action="RunScript($CWD/resources/lib/deviceCtrl.py,TELLDUS_LIVE_INIT)" />
 
-		<!-- Local tdtool -->
-		<setting id="telldusExe" type="file" label="31030" visible="eq(-11,1)" default="c:\Program Files (x86)\Telldus\tdtool.exe" />
+		<setting id="telldusExe" type="file" label="31016" visible="eq(-11,1)" default="c:\Program Files (x86)\Telldus\tdtool.exe" />
 		<setting id="init_devices_local" type="action" label="31001" visible="eq(-12,1)" action="RunScript($CWD/resources/lib/deviceCtrl.py,TELLDUS_LOCAL_INIT)" />
-		
+
+		<setting type="sep" />
+		<setting id="resetTelldusLive" type="action" visible="eq(-14,0)" label="31018" action="RunScript($CWD/resources/lib/deviceCtrl.py,TELLDUS_LIVE_RESET)" />
+		<setting type="sep" visible="eq(-15,0)" />
+		<setting id="quickMode" label="31019" type="bool" visible="true" default="false" />
+		<setting id="terraStickDebug" label="31020" type="bool" visible="true" default="false" />
+
+		<setting id="dev0ID" type="text" default="" visible="false" />
+		<setting id="dev0Val" type="text" default="" visible="false" />
+		<setting id="dev1ID" type="text" default="" visible="false" />
+		<setting id="dev1Val" type="text" default="" visible="false" />
+		<setting id="dev2ID" type="text" default="" visible="false" />
+		<setting id="dev2Val" type="text" default="" visible="false" />
+		<setting id="dev3ID" type="text" default="" visible="false" />
+		<setting id="dev3Val" type="text" default="" visible="false" />
+		<setting id="dev4ID" type="text" default="" visible="false" />
+		<setting id="dev4Val" type="text" default="" visible="false" />
+		<setting id="dev5ID" type="text" default="" visible="false" />
+		<setting id="dev5Val" type="text" default="" visible="false" />
+		<setting id="dev6ID" type="text" default="" visible="false" />
+		<setting id="dev6Val" type="text" default="" visible="false" />
+		<setting id="dev7ID" type="text" default="" visible="false" />
+		<setting id="dev7Val" type="text" default="" visible="false" />
+		<setting id="dev8ID" type="text" default="" visible="false" />
+		<setting id="dev8Val" type="text" default="" visible="false" />
+		<setting id="dev9ID" type="text" default="" visible="false" />
+		<setting id="dev9Val" type="text" default="" visible="false" />
+		<setting id="dev10ID" type="text" default="" visible="false" />
+		<setting id="dev10Val" type="text" default="" visible="false" />
+		<setting id="dev11ID" type="text" default="" visible="false" />
+		<setting id="dev11Val" type="text" default="" visible="false" />
+		<setting id="dev12ID" type="text" default="" visible="false" />
+		<setting id="dev12Val" type="text" default="" visible="false" />
+		<setting id="dev13ID" type="text" default="" visible="false" />
+		<setting id="dev13Val" type="text" default="" visible="false" />
+		<setting id="dev14ID" type="text" default="" visible="false" />
+		<setting id="dev14Val" type="text" default="" visible="false" />
+		<setting id="dev15ID" type="text" default="" visible="false" />
+		<setting id="dev15Val" type="text" default="" visible="false" />
+		<setting id="dev16ID" type="text" default="" visible="false" />
+		<setting id="dev16Val" type="text" default="" visible="false" />
+		<setting id="dev17ID" type="text" default="" visible="false" />
+		<setting id="dev17Val" type="text" default="" visible="false" />
+		<setting id="dev18ID" type="text" default="" visible="false" />
+		<setting id="dev18Val" type="text" default="" visible="false" />
+		<setting id="dev19ID" type="text" default="" visible="false" />
+		<setting id="dev19Val" type="text" default="" visible="false" />
+		<setting id="dev20ID" type="text" default="" visible="false" />
+		<setting id="dev20Val" type="text" default="" visible="false" />
+		<setting id="dev21ID" type="text" default="" visible="false" />
+		<setting id="dev21Val" type="text" default="" visible="false" />
+		<setting id="dev22ID" type="text" default="" visible="false" />
+		<setting id="dev22Val" type="text" default="" visible="false" />
+		<setting id="dev23ID" type="text" default="" visible="false" />
+		<setting id="dev23Val" type="text" default="" visible="false" />
+		<setting id="dev24ID" type="text" default="" visible="false" />
+		<setting id="dev24Val" type="text" default="" visible="false" />
+		<setting id="dev25ID" type="text" default="" visible="false" />
+		<setting id="dev25Val" type="text" default="" visible="false" />
+		<setting id="dev26ID" type="text" default="" visible="false" />
+		<setting id="dev26Val" type="text" default="" visible="false" />
+		<setting id="dev27ID" type="text" default="" visible="false" />
+		<setting id="dev27Val" type="text" default="" visible="false" />
+		<setting id="dev28ID" type="text" default="" visible="false" />
+		<setting id="dev28Val" type="text" default="" visible="false" />
+		<setting id="dev29ID" type="text" default="" visible="false" />
+		<setting id="dev29Val" type="text" default="" visible="false" />
+		<setting id="dev30ID" type="text" default="" visible="false" />
+		<setting id="dev30Val" type="text" default="" visible="false" />
+		<setting id="dev31ID" type="text" default="" visible="false" />	
+		<setting id="dev31Val" type="text" default="" visible="false" />
 	</category>
 
-	<category label="31050"><!-- Advanced -->
-
-		<setting id="telldusSource" type="text" visible="false" />
-		<setting id="resetTelldusLive" type="action" visible="eq(-1,Telldus Live!)" label="31056" action="RunScript($CWD/resources/lib/deviceCtrl.py,TELLDUS_LIVE_RESET)" />
-
-		<!-- Debugging -->
-		<setting id="terraStickDebug" label="31055" type="bool" visible="true" default="false" />
-
-		<!-- Number of devices -->
-		<setting id="deviceCount" label="31051" type="labelenum" values="0|1|2|3|4|5|6|7|8" visible="true" default="0" />
-
-		<setting id="ID0" label="31081" type="number" visible="gt(-1,0)" />
-		<setting id="name0" label="31053" type="text" visible="gt(-2,0)" />
-		<setting id="val0" type="text" visible="false" />
-		<setting id="type0" label="31054" type="labelenum" values="SWITCH|DIMMER" visible="gt(-4,0)" />
-
-		<setting type="sep" visible="gt(-5,1)" />
-		<setting id="ID1" label="31082" type="number" visible="gt(-6,1)" />
-		<setting id="name1" label="31053" type="text" visible="gt(-7,1)" />
-		<setting id="val1" type="text" visible="false" />
-		<setting id="type1" label="31054" type="labelenum" values="SWITCH|DIMMER" visible="gt(-9,1)" />
-
-		<setting type="sep" visible="gt(-10,2)" />
-		<setting id="ID2" label="31083" type="number" visible="gt(-11,2)" />
-		<setting id="name2" label="31053" type="text" visible="gt(-12,2)" />
-		<setting id="val2" type="text" visible="false" />
-		<setting id="type2" label="31054" type="labelenum" values="SWITCH|DIMMER" visible="gt(-14,2)" />
-
-		<setting type="sep" visible="gt(-15,3)" />
-		<setting id="ID3" label="31084" type="number" visible="gt(-16,3)" />
-		<setting id="name3" label="31053" type="text" visible="gt(-17,3)" />
-		<setting id="val3" type="text" visible="false" />
-		<setting id="type3" label="31054" type="labelenum" values="SWITCH|DIMMER" visible="gt(-19,3)" />
-
-		<setting type="sep" visible="gt(-20,4)" />
-		<setting id="ID4" label="31085" type="number" visible="gt(-21,4)" />
-		<setting id="name4" label="31053" type="text" visible="gt(-22,4)" />
-		<setting id="val4" type="text" visible="false" />
-		<setting id="type4" label="31054" type="labelenum" values="SWITCH|DIMMER" visible="gt(-24,4)" />
-
-		<setting type="sep" visible="gt(-25,5)" />
-		<setting id="ID5" label="31086" type="number" visible="gt(-26,5)" />
-		<setting id="name5" label="31053" type="text" visible="gt(-27,5)" />
-		<setting id="val5" type="text" visible="false" />
-		<setting id="type5" label="31054" type="labelenum" values="SWITCH|DIMMER" visible="gt(-29,5)" />
-
-		<setting type="sep" visible="gt(-30,6)" />
-		<setting id="ID6" label="31087" type="number" visible="gt(-31,6)" />
-		<setting id="name6" label="31053" type="text" visible="gt(-32,6)" />
-		<setting id="val6" label="31053" type="text" visible="false" />
-		<setting id="type6" label="31054" type="labelenum" values="SWITCH|DIMMER" visible="gt(-34,6)" />
-
-		<setting type="sep" visible="gt(-35,7)" />
-		<setting id="ID7" label="31088" type="number" visible="gt(-36,7)" />
-		<setting id="name7" label="31053" type="text" visible="gt(-37,7)" />
-		<setting id="val7" type="text" visible="false" />
-		<setting id="type7" label="31054" type="labelenum" values="SWITCH|DIMMER" visible="gt(-39,7)" />
-
+	<category label="31021"><!-- Device settings -->
+		<setting id="deviceCount" type="number" visible="false" default="0" />
+		<setting id="dev0Name" type="text" label="31030" default="" visible="gt(-1,0)" />
+		<setting id="dev0Type" type="labelenum" label="31030" default="switch" values="switch|dimmer" visible="gt(-2,0)" />
+		<setting type="sep" visible="gt(-3,0)" />
+		<setting id="dev1Name" type="text" label="31031" default="" visible="gt(-4,1)" />
+		<setting id="dev1Type" type="labelenum" label="31031" default="switch" values="switch|dimmer" visible="gt(-5,1)" />
+		<setting type="sep" visible="gt(-6,1)" />
+		<setting id="dev2Name" type="text" label="31032" default="" visible="gt(-7,2)" />
+		<setting id="dev2Type" type="labelenum" label="31032" default="switch" values="switch|dimmer" visible="gt(-8,2)" />
+		<setting type="sep" visible="gt(-9,2)" />
+		<setting id="dev3Name" type="text" label="31033" default="" visible="gt(-10,3)" />
+		<setting id="dev3Type" type="labelenum" label="31033" default="switch" values="switch|dimmer" visible="gt(-11,3)" />
+		<setting type="sep" visible="gt(-12,3)" />
+		<setting id="dev4Name" type="text" label="31034" default="" visible="gt(-13,4)" />
+		<setting id="dev4Type" type="labelenum" label="31034" default="switch" values="switch|dimmer" visible="gt(-14,4)" />
+		<setting type="sep" visible="gt(-15,4)" />
+		<setting id="dev5Name" type="text" label="31035" default="" visible="gt(-16,5)" />
+		<setting id="dev5Type" type="labelenum" label="31035" default="switch" values="switch|dimmer" visible="gt(-17,5)" />
+		<setting type="sep" visible="gt(-18,5)" />
+		<setting id="dev6Name" type="text" label="31036" default="" visible="gt(-19,6)" />
+		<setting id="dev6Type" type="labelenum" label="31036" default="switch" values="switch|dimmer" visible="gt(-20,6)" />
+		<setting type="sep" visible="gt(-21,6)" />
+		<setting id="dev7Name" type="text" label="31037" default="" visible="gt(-22,7)" />
+		<setting id="dev7Type" type="labelenum" label="31037" default="switch" values="switch|dimmer" visible="gt(-23,7)" />
+		<setting type="sep" visible="gt(-24,7)" />
+		<setting id="dev8Name" type="text" label="31038" default="" visible="gt(-25,8)" />
+		<setting id="dev8Type" type="labelenum" label="31038" default="switch" values="switch|dimmer" visible="gt(-26,8)" />
+		<setting type="sep" visible="gt(-27,8)" />
+		<setting id="dev9Name" type="text" label="31039" default="" visible="gt(-28,9)" />
+		<setting id="dev9Type" type="labelenum" label="31039" default="switch" values="switch|dimmer" visible="gt(-29,9)" />
+		<setting type="sep" visible="gt(-30,9)" />
+		<setting id="dev10Name" type="text" label="31040" default="" visible="gt(-31,10)" />
+		<setting id="dev10Type" type="labelenum" label="31040" default="switch" values="switch|dimmer" visible="gt(-32,10)" />
+		<setting type="sep" visible="gt(-33,10)" />
+		<setting id="dev11Name" type="text" label="31041" default="" visible="gt(-34,11)" />
+		<setting id="dev11Type" type="labelenum" label="31041" default="switch" values="switch|dimmer" visible="gt(-35,11)" />
+		<setting type="sep" visible="gt(-36,11)" />
+		<setting id="dev12Name" type="text" label="31042" default="" visible="gt(-37,12)" />
+		<setting id="dev12Type" type="labelenum" label="31042" default="switch" values="switch|dimmer" visible="gt(-38,12)" />
+		<setting type="sep" visible="gt(-39,12)" />
+		<setting id="dev13Name" type="text" label="31043" default="" visible="gt(-40,13)" />
+		<setting id="dev13Type" type="labelenum" label="31043" default="switch" values="switch|dimmer" visible="gt(-41,13)" />
+		<setting type="sep" visible="gt(-42,13)" />
+		<setting id="dev14Name" type="text" label="31044" default="" visible="gt(-43,14)" />
+		<setting id="dev14Type" type="labelenum" label="31044" default="switch" values="switch|dimmer" visible="gt(-44,14)" />
+		<setting type="sep" visible="gt(-45,14)" />
+		<setting id="dev15Name" type="text" label="31045" default="" visible="gt(-46,15)" />
+		<setting id="dev15Type" type="labelenum" label="31045" default="switch" values="switch|dimmer" visible="gt(-47,15)" />
+		<setting type="sep" visible="gt(-48,15)" />
+		<setting id="dev16Name" type="text" label="31046" default="" visible="gt(-49,16)" />
+		<setting id="dev16Type" type="labelenum" label="31046" default="switch" values="switch|dimmer" visible="gt(-50,16)" />
+		<setting type="sep" visible="gt(-51,16)" />
+		<setting id="dev17Name" type="text" label="31047" default="" visible="gt(-52,17)" />
+		<setting id="dev17Type" type="labelenum" label="31047" default="switch" values="switch|dimmer" visible="gt(-53,17)" />
+		<setting type="sep" visible="gt(-54,17)" />
+		<setting id="dev18Name" type="text" label="31048" default="" visible="gt(-55,18)" />
+		<setting id="dev18Type" type="labelenum" label="31048" default="switch" values="switch|dimmer" visible="gt(-56,18)" />
+		<setting type="sep" visible="gt(-57,18)" />
+		<setting id="dev19Name" type="text" label="31049" default="" visible="gt(-58,19)" />
+		<setting id="dev19Type" type="labelenum" label="31049" default="switch" values="switch|dimmer" visible="gt(-59,19)" />
+		<setting type="sep" visible="gt(-60,19)" />
+		<setting id="dev20Name" type="text" label="31050" default="" visible="gt(-61,20)" />
+		<setting id="dev20Type" type="labelenum" label="31050" default="switch" values="switch|dimmer" visible="gt(-62,20)" />
+		<setting type="sep" visible="gt(-63,20)" />
+		<setting id="dev21Name" type="text" label="31051" default="" visible="gt(-64,21)" />
+		<setting id="dev21Type" type="labelenum" label="31051" default="switch" values="switch|dimmer" visible="gt(-65,21)" />
+		<setting type="sep" visible="gt(-66,21)" />
+		<setting id="dev22Name" type="text" label="31052" default="" visible="gt(-67,22)" />
+		<setting id="dev22Type" type="labelenum" label="31052" default="switch" values="switch|dimmer" visible="gt(-68,22)" />
+		<setting type="sep" visible="gt(-69,22)" />
+		<setting id="dev23Name" type="text" label="31053" default="" visible="gt(-70,23)" />
+		<setting id="dev23Type" type="labelenum" label="31053" default="switch" values="switch|dimmer" visible="gt(-71,23)" />
+		<setting type="sep" visible="gt(-72,23)" />
+		<setting id="dev24Name" type="text" label="31054" default="" visible="gt(-73,24)" />
+		<setting id="dev24Type" type="labelenum" label="31054" default="switch" values="switch|dimmer" visible="gt(-74,24)" />
+		<setting type="sep" visible="gt(-75,24)" />
+		<setting id="dev25Name" type="text" label="31055" default="" visible="gt(-76,25)" />
+		<setting id="dev25Type" type="labelenum" label="31055" default="switch" values="switch|dimmer" visible="gt(-77,25)" />
+		<setting type="sep" visible="gt(-78,25)" />
+		<setting id="dev26Name" type="text" label="31056" default="" visible="gt(-79,26)" />
+		<setting id="dev26Type" type="labelenum" label="31056" default="switch" values="switch|dimmer" visible="gt(-80,26)" />
+		<setting type="sep" visible="gt(-81,26)" />
+		<setting id="dev27Name" type="text" label="31057" default="" visible="gt(-82,27)" />
+		<setting id="dev27Type" type="labelenum" label="31057" default="switch" values="switch|dimmer" visible="gt(-83,27)" />
+		<setting type="sep" visible="gt(-84,27)" />
+		<setting id="dev28Name" type="text" label="31058" default="" visible="gt(-85,28)" />
+		<setting id="dev28Type" type="labelenum" label="31058" default="switch" values="switch|dimmer" visible="gt(-86,28)" />
+		<setting type="sep" visible="gt(-87,28)" />
+		<setting id="dev29Name" type="text" label="31059" default="" visible="gt(-88,29)" />
+		<setting id="dev29Type" type="labelenum" label="31059" default="switch" values="switch|dimmer" visible="gt(-89,29)" />
+		<setting type="sep" visible="gt(-90,29)" />
+		<setting id="dev30Name" type="text" label="31060" default="" visible="gt(-91,30)" />
+		<setting id="dev30Type" type="labelenum" label="31060" default="switch" values="switch|dimmer" visible="gt(-92,30)" />
+		<setting type="sep" visible="gt(-93,30)" />
+		<setting id="dev31Name" type="text" label="31061" default="" visible="gt(-94,31)" />
+		<setting id="dev31Type" type="labelenum" label="31061" default="switch" values="switch|dimmer" visible="gt(-95,31)" />
+		<setting type="sep" visible="gt(-96,31)" />
 	</category>
-	
-	<category label="31060"> <!-- Playing -->
-		<setting id="deviceCount" type="text" visible="false" />
-		<setting id="type0" type="text" visible="false" />
-		<setting id="automation_playing_ID0" type="bool" label="31071" visible="gt(-2,0)" default="false" />
-		<setting id="automation_playing_switch_ID0" type="bool" label="31061" visible="eq(-2,SWITCH) + gt(-3,0)" enable="eq(-1,true)" default="false" />
-		<setting id="automation_playing_dimmer_ID0" type="slider" label="31061" visible="eq(-3,DIMMER) + gt(-4,0)" enable="eq(-2,true)" range="0,32,255" option="int" default="0" />
-		<setting type="sep" visible="gt(-5,1)" />
-		<setting id="type1" type="text" visible="false" />
-		<setting id="automation_playing_ID1" type="bool" label="31072" visible="gt(-7,1)" default="false" />
-		<setting id="automation_playing_switch_ID1" type="bool" label="31062" visible="eq(-2,SWITCH) + gt(-8,1)" enable="eq(-1,true)" default="false" />
-		<setting id="automation_playing_dimmer_ID1" type="slider" label="31062" visible="eq(-3,DIMMER) + gt(-9,1)" enable="eq(-2,true)" range="0,32,255" option="int" default="0" />
-		<setting type="sep" visible="gt(-10,2)" />
-		<setting id="type2" type="text" visible="false" />
-		<setting id="automation_playing_ID2" type="bool" label="31073" visible="gt(-12,2)" default="false" />
-		<setting id="automation_playing_switch_ID2" type="bool" label="31063" visible="eq(-2,SWITCH) + gt(-13,2)" enable="eq(-1,true)" default="false" />
-		<setting id="automation_playing_dimmer_ID2" type="slider" label="31063" visible="eq(-3,DIMMER) + gt(-14,2)" enable="eq(-2,true)" range="0,32,255" option="int" default="0" />
-		<setting type="sep" visible="gt(-15,3)" />
-		<setting id="type3" type="text" visible="false" />
-		<setting id="automation_playing_ID3" type="bool" label="31074" visible="gt(-17,3)" default="false" />
-		<setting id="automation_playing_switch_ID3" type="bool" label="31064" visible="eq(-2,SWITCH) + gt(-18,3)" enable="eq(-1,true)" default="false" />
-		<setting id="automation_playing_dimmer_ID3" type="slider" label="31064" visible="eq(-3,DIMMER) + gt(-19,3)" enable="eq(-2,true)" range="0,32,255" option="int" default="0" />
-		<setting type="sep" visible="gt(-20,4)" />
-		<setting id="type4" type="text" visible="false" />
-		<setting id="automation_playing_ID4" type="bool" label="31075" visible="gt(-22,4)" default="false" />
-		<setting id="automation_playing_switch_ID4" type="bool" label="31065" visible="eq(-2,SWITCH) + gt(-23,4)" enable="eq(-1,true)" default="false" />
-		<setting id="automation_playing_dimmer_ID4" type="slider" label="31065" visible="eq(-3,DIMMER) + gt(-24,4)" enable="eq(-2,true)" range="0,32,255" option="int" default="0" />
-		<setting type="sep" visible="gt(-25,5)" />
-		<setting id="type5" type="text" visible="false" />
-		<setting id="automation_playing_ID5" type="bool" label="31076" visible="gt(-27,5)" default="false" />
-		<setting id="automation_playing_switch_ID5" type="bool" label="31066" visible="eq(-2,SWITCH) + gt(-28,5)" enable="eq(-1,true)" default="false" />
-		<setting id="automation_playing_dimmer_ID5" type="slider" label="31066" visible="eq(-3,DIMMER) + gt(-29,5)" enable="eq(-2,true)" range="0,32,255" option="int" default="0" />
-		<setting type="sep" visible="gt(-30,6)" />
-		<setting id="type6" type="text" visible="false" />
-		<setting id="automation_playing_ID6" type="bool" label="31077" visible="gt(-32,6)" default="false" />
-		<setting id="automation_playing_switch_ID6" type="bool" label="31067" visible="eq(-2,SWITCH) + gt(-33,6)" enable="eq(-1,true)" default="false" />
-		<setting id="automation_playing_dimmer_ID6" type="slider" label="31067" visible="eq(-3,DIMMER) + gt(-34,6)" enable="eq(-2,true)" range="0,32,255" option="int" default="0" />
-		<setting type="sep" visible="gt(-35,7)" />
-		<setting id="type7" type="text" visible="false" />
-		<setting id="automation_playing_ID7" type="bool" label="31078" visible="gt(-37,7)" default="false" />
-		<setting id="automation_playing_switch_ID7" type="bool" label="31068" visible="eq(-2,SWITCH) + gt(-38,7)" enable="eq(-1,true)" default="false" />
-		<setting id="automation_playing_dimmer_ID7" type="slider" label="31068" visible="eq(-3,DIMMER) + gt(-39,7)" enable="eq(-2,true)" range="0,32,255" option="int" default="0" />
-		<setting id="automation_playing_no_devices" type="text" label="31090" visible="eq(-40,0)" enable="false" />
-	</category>	
-	<category label="31070"> <!-- Paused -->
-		<setting id="deviceCount" type="text" visible="false" />
-		<setting id="type0" type="text" visible="false" />
-		<setting id="automation_paused_ID0" type="bool" label="31071" visible="gt(-2,0)" default="false" />
-		<setting id="automation_paused_switch_ID0" type="bool" label="31061" visible="eq(-2,SWITCH) + gt(-3,0)" enable="eq(-1,true)" default="0" />
-		<setting id="automation_paused_dimmer_ID0" type="slider" label="31061" visible="eq(-3,DIMMER) + gt(-4,0)" enable="eq(-2,true)" range="0,32,255" option="int" default="0" />
-		<setting type="sep" visible="gt(-5,1)" />
-		<setting id="type1" type="text" visible="false" />
-		<setting id="automation_paused_ID1" type="bool" label="31072" visible="gt(-7,1)" default="false" />
-		<setting id="automation_paused_switch_ID1" type="bool" label="31062" visible="eq(-2,SWITCH) + gt(-8,1)" enable="eq(-1,true)" default="0" />
-		<setting id="automation_paused_dimmer_ID1" type="slider" label="31062" visible="eq(-3,DIMMER) + gt(-9,1)" enable="eq(-2,true)" range="0,32,255" option="int" default="0" />
-		<setting type="sep" visible="gt(-10,2)" />
-		<setting id="type2" type="text" visible="false" />
-		<setting id="automation_paused_ID2" type="bool" label="31073" visible="gt(-12,2)" default="false" />
-		<setting id="automation_paused_switch_ID2" type="bool" label="31063" visible="eq(-2,SWITCH) + gt(-13,2)" enable="eq(-1,true)" default="0" />
-		<setting id="automation_paused_dimmer_ID2" type="slider" label="31063" visible="eq(-3,DIMMER) + gt(-14,2)" enable="eq(-2,true)" range="0,32,255" option="int" default="0" />
-		<setting type="sep" visible="gt(-15,3)" />
-		<setting id="type3" type="text" visible="false" />
-		<setting id="automation_paused_ID3" type="bool" label="31074" visible="gt(-17,3)" default="false" />
-		<setting id="automation_paused_switch_ID3" type="bool" label="31064" visible="eq(-2,SWITCH) + gt(-18,3)" enable="eq(-1,true)" default="0" />
-		<setting id="automation_paused_dimmer_ID3" type="slider" label="31064" visible="eq(-3,DIMMER) + gt(-19,3)" enable="eq(-2,true)" range="0,32,255" option="int" default="0" />
-		<setting type="sep" visible="gt(-20,4)" />
-		<setting id="type4" type="text" visible="false" />
-		<setting id="automation_paused_ID4" type="bool" label="31075" visible="gt(-22,4)" default="false" />
-		<setting id="automation_paused_switch_ID4" type="bool" label="31065" visible="eq(-2,SWITCH) + gt(-23,4)" enable="eq(-1,true)" default="0" />
-		<setting id="automation_paused_dimmer_ID4" type="slider" label="31065" visible="eq(-3,DIMMER) + gt(-24,4)" enable="eq(-2,true)" range="0,32,255" option="int" default="0" />
-		<setting type="sep" visible="gt(-25,5)" />
-		<setting id="type5" type="text" visible="false" />
-		<setting id="automation_paused_ID5" type="bool" label="31076" visible="gt(-27,5)" default="false" />
-		<setting id="automation_paused_switch_ID5" type="bool" label="31066" visible="eq(-2,SWITCH) + gt(-28,5)" enable="eq(-1,true)" default="0" />
-		<setting id="automation_paused_dimmer_ID5" type="slider" label="31066" visible="eq(-3,DIMMER) + gt(-29,5)" enable="eq(-2,true)" range="0,32,255" option="int" default="0" />
-		<setting type="sep" visible="gt(-30,6)" />
-		<setting id="type6" type="text" visible="false" />
-		<setting id="automation_paused_ID6" type="bool" label="31077" visible="gt(-32,6)" default="false" />
-		<setting id="automation_paused_switch_ID6" type="bool" label="31067" visible="eq(-2,SWITCH) + gt(-33,6)" enable="eq(-1,true)" default="0" />
-		<setting id="automation_paused_dimmer_ID6" type="slider" label="31067" visible="eq(-3,DIMMER) + gt(-34,6)" enable="eq(-2,true)" range="0,32,255" option="int" default="0" />
-		<setting type="sep" visible="gt(-35,7)" />
-		<setting id="type7" type="text" visible="false" />
-		<setting id="automation_paused_ID7" type="bool" label="31078" visible="gt(-37,7)" default="false" />
-		<setting id="automation_paused_switch_ID7" type="bool" label="31068" visible="eq(-2,SWITCH) + gt(-38,7)" enable="eq(-1,true)" default="0" />
-		<setting id="automation_paused_dimmer_ID7" type="slider" label="31068" visible="eq(-3,DIMMER) + gt(-39,7)" enable="eq(-2,true)" range="0,32,255" option="int" default="0" />
-		<setting id="automation_playing_no_devices" type="text" label="31090" visible="eq(-40,0)" enable="false" />
-	</category>
-	<category label="31080"> <!-- Stopped -->
-		<setting id="deviceCount" type="text" visible="false" />
-		<setting id="type0" type="text" visible="false" />
-		<setting id="automation_stopped_ID0" type="bool" label="31071" visible="gt(-2,0)" default="false" />
-		<setting id="automation_stopped_switch_ID0" type="bool" label="31061" visible="eq(-2,SWITCH) + gt(-3,0)" enable="eq(-1,true)" default="0" />
-		<setting id="automation_stopped_dimmer_ID0" type="slider" label="31061" visible="eq(-3,DIMMER) + gt(-4,0)" enable="eq(-2,true)" range="0,32,255" option="int" default="0" />
-		<setting type="sep" visible="gt(-5,1)" />
-		<setting id="type1" type="text" visible="false" />
-		<setting id="automation_stopped_ID1" type="bool" label="31072" visible="gt(-7,1)" default="false" />
-		<setting id="automation_stopped_switch_ID1" type="bool" label="31062" visible="eq(-2,SWITCH) + gt(-8,1)" enable="eq(-1,true)" default="0" />
-		<setting id="automation_stopped_dimmer_ID1" type="slider" label="31062" visible="eq(-3,DIMMER) + gt(-9,1)" enable="eq(-2,true)" range="0,32,255" option="int" default="0" />
-		<setting type="sep" visible="gt(-10,2)" />
-		<setting id="type2" type="text" visible="false" />
-		<setting id="automation_stopped_ID2" type="bool" label="31073" visible="gt(-12,2)" default="false" />
-		<setting id="automation_stopped_switch_ID2" type="bool" label="31063" visible="eq(-2,SWITCH) + gt(-13,2)" enable="eq(-1,true)" default="0" />
-		<setting id="automation_stopped_dimmer_ID2" type="slider" label="31063" visible="eq(-3,DIMMER) + gt(-14,2)" enable="eq(-2,true)" range="0,32,255" option="int" default="0" />
-		<setting type="sep" visible="gt(-15,3)" />
-		<setting id="type3" type="text" visible="false" />
-		<setting id="automation_stopped_ID3" type="bool" label="31074" visible="gt(-17,3)" default="false" />
-		<setting id="automation_stopped_switch_ID3" type="bool" label="31064" visible="eq(-2,SWITCH) + gt(-18,3)" enable="eq(-1,true)" default="0" />
-		<setting id="automation_stopped_dimmer_ID3" type="slider" label="31064" visible="eq(-3,DIMMER) + gt(-19,3)" enable="eq(-2,true)" range="0,32,255" option="int" default="0" />
-		<setting type="sep" visible="gt(-20,4)" />
-		<setting id="type4" type="text" visible="false" />
-		<setting id="automation_stopped_ID4" type="bool" label="31075" visible="gt(-22,4)" default="false" />
-		<setting id="automation_stopped_switch_ID4" type="bool" label="31065" visible="eq(-2,SWITCH) + gt(-23,4)" enable="eq(-1,true)" default="0" />
-		<setting id="automation_stopped_dimmer_ID4" type="slider" label="31065" visible="eq(-3,DIMMER) + gt(-24,4)" enable="eq(-2,true)" range="0,32,255" option="int" default="0" />
-		<setting type="sep" visible="gt(-25,5)" />
-		<setting id="type5" type="text" visible="false" />
-		<setting id="automation_stopped_ID5" type="bool" label="31076" visible="gt(-27,5)" default="false" />
-		<setting id="automation_stopped_switch_ID5" type="bool" label="31066" visible="eq(-2,SWITCH) + gt(-28,5)" enable="eq(-1,true)" default="0" />
-		<setting id="automation_stopped_dimmer_ID5" type="slider" label="31066" visible="eq(-3,DIMMER) + gt(-29,5)" enable="eq(-2,true)" range="0,32,255" option="int" default="0" />
-		<setting type="sep" visible="gt(-30,6)" />
-		<setting id="type6" type="text" visible="false" />
-		<setting id="automation_stopped_ID6" type="bool" label="31077" visible="gt(-32,6)" default="false" />
-		<setting id="automation_stopped_switch_ID6" type="bool" label="31067" visible="eq(-2,SWITCH) + gt(-33,6)" enable="eq(-1,true)" default="0" />
-		<setting id="automation_stopped_dimmer_ID6" type="slider" label="31067" visible="eq(-3,DIMMER) + gt(-34,6)" enable="eq(-2,true)" range="0,32,255" option="int" default="0" />
-		<setting type="sep" visible="gt(-35,7)" />
-		<setting id="type7" type="text" visible="false" />
-		<setting id="automation_stopped_ID7" type="bool" label="31078" visible="gt(-37,7)" default="false" />
-		<setting id="automation_stopped_switch_ID7" type="bool" label="31068" visible="eq(-2,SWITCH) + gt(-38,7)" enable="eq(-1,true)" default="0" />
-		<setting id="automation_stopped_dimmer_ID7" type="slider" label="31068" visible="eq(-3,DIMMER) + gt(-39,7)" enable="eq(-2,true)" range="0,32,255" option="int" default="0" />
-		<setting id="automation_playing_no_devices" type="text" label="31090" visible="eq(-40,0)" enable="false" />
-	</category>
+
+	<!-- Playback automation -->
+	<!-- category label="31026">
+		<setting id="playbackAutomation" label="31028" type="bool" visible="true" default="false" />
+		<setting id="deviceCount" type="number" visible="false" />
+		<setting id="dev0PlaybackPlaying" label="31100" type="bool" visible="gt(-1,0)+eq(-2,true)" default="false" />
+		<setting id="dev0PlaybackPaused" label="31132" type="bool" visible="gt(-2,0)+eq(-3,true)" default="false"/>
+		<setting id="dev0PlaybackStopped" label="31164" type="bool" visible="gt(-3,0)+eq(-4,true)" default="false"/>
+	</category -->
+
+	<!-- Playing -->
+	<!-- category label="31023">
+		<setting id="deviceCount" type="number" visible="false" />
+		<setting id="playbackAutomation" type="bool" visible="false" />
+		<setting id="automatePlayingDisabled" label="31027" type="text" visible="eq(-1,false)" />
+		<setting id="dev0Type" type="text" visible="false" />
+		<setting id="dev0Playing" type="labelenum" label="31030" default="off" values="on|off" visible="eq(-1,switch)+eq(-3,true)+gt(-4,0)" />
+		<setting id="dev0Playing" type="labelenum" label="31030" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-4,true)+gt(-5,0)" />
+		<setting id="dev1Type" type="text" visible="false" />
+		<setting id="dev1Playing" type="labelenum" label="31031" default="off" values="on|off" visible="eq(-1,switch)+eq(-6,true)+gt(-7,1)" />
+		<setting id="dev1Playing" type="labelenum" label="31031" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-7,true)+gt(-8,1)" />
+		<setting id="dev2Type" type="text" visible="false" />
+		<setting id="dev2Playing" type="labelenum" label="31032" default="off" values="on|off" visible="eq(-1,switch)+eq(-9,true)+gt(-10,2)" />
+		<setting id="dev2Playing" type="labelenum" label="31032" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer+eq(-10,true)+gt(-11,2))" />
+		<setting id="dev3Type" type="text" visible="false" />
+		<setting id="dev3Playing" type="labelenum" label="31033" default="off" values="on|off" visible="eq(-1,switch)+eq(-12,true)+gt(-13,3)" />
+		<setting id="dev3Playing" type="labelenum" label="31033" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-13,true)+gt(-14,3)" />
+		<setting id="dev4Type" type="text" visible="false" />
+		<setting id="dev4Playing" type="labelenum" label="31034" default="off" values="on|off" visible="eq(-1,switch)+eq(-15,true)+gt(-16,4)" />
+		<setting id="dev4Playing" type="labelenum" label="31034" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-16,true)+gt(-17,4)" />
+		<setting id="dev5Type" type="text" visible="false" />
+		<setting id="dev5Playing" type="labelenum" label="31035" default="off" values="on|off" visible="eq(-1,switch)+eq(-18,true)+gt(-19,5)" />
+		<setting id="dev5Playing" type="labelenum" label="31035" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-19,true)+gt(-20,5)" />
+		<setting id="dev6Type" type="text" visible="false" />
+		<setting id="dev6Playing" type="labelenum" label="31036" default="off" values="on|off" visible="eq(-1,switch)+eq(-21,true)+gt(-22,6)" />
+		<setting id="dev6Playing" type="labelenum" label="31036" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-22,true)+gt(-23,6)" />
+		<setting id="dev7Type" type="text" visible="false" />
+		<setting id="dev7Playing" type="labelenum" label="31037" default="off" values="on|off" visible="eq(-1,switch)+eq(-24,true)+gt(-25,7)" />
+		<setting id="dev7Playing" type="labelenum" label="31037" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-25,true)+gt(-26,7)" />
+		<setting id="dev8Type" type="text" visible="false" />
+		<setting id="dev8Playing" type="labelenum" label="31038" default="off" values="on|off" visible="eq(-1,switch)+eq(-27,true)+gt(-28,8)" />
+		<setting id="dev8Playing" type="labelenum" label="31038" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-28,true)+gt(-29,8)" />
+		<setting id="dev9Type" type="text" visible="false" />
+		<setting id="dev9Playing" type="labelenum" label="31039" default="off" values="on|off" visible="eq(-1,switch)+eq(-30,true)+gt(-31,9)" />
+		<setting id="dev9Playing" type="labelenum" label="31039" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-31,true)+gt(-32,9)" />
+		<setting id="dev10Type" type="text" visible="false" />
+		<setting id="dev10Playing" type="labelenum" label="31040" default="off" values="on|off" visible="eq(-1,switch)+eq(-33,true)+gt(-34,10)" />
+		<setting id="dev10Playing" type="labelenum" label="31040" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-34,true)+gt(-35,10)" />
+		<setting id="dev11Type" type="text" visible="false" />
+		<setting id="dev11Playing" type="labelenum" label="31041" default="off" values="on|off" visible="eq(-1,switch)+eq(-36,true)+gt(-37,11)" />
+		<setting id="dev11Playing" type="labelenum" label="31041" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-37,true)+gt(-38,11)" />
+		<setting id="dev12Type" type="text" visible="false" />
+		<setting id="dev12Playing" type="labelenum" label="31042" default="off" values="on|off" visible="eq(-1,switch)+eq(-39,true)+gt(-40,12)" />
+		<setting id="dev12Playing" type="labelenum" label="31042" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-40,true)+gt(-41,11)" />
+		<setting id="dev13Type" type="text" visible="false" />
+		<setting id="dev13Playing" type="labelenum" label="31043" default="off" values="on|off" visible="eq(-1,switch)+eq(-42,true)+gt(-43,13)" />
+		<setting id="dev13Playing" type="labelenum" label="31043" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-43,true)+gt(-44,13)" />
+		<setting id="dev14Type" type="text" visible="false" />
+		<setting id="dev14Playing" type="labelenum" label="31044" default="off" values="on|off" visible="eq(-1,switch)+eq(-44,true)+gt(-45,14)" />
+		<setting id="dev14Playing" type="labelenum" label="31044" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-45,true)+gt(-46,14)" />
+		<setting id="dev15Type" type="text" visible="false" />
+		<setting id="dev15Playing" type="labelenum" label="31045" default="off" values="on|off" visible="eq(-1,switch)+eq(-47,true)+gt(-48,15)" />
+		<setting id="dev15Playing" type="labelenum" label="31045" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-48,true)+gt(-49,15)" />
+		<setting id="dev16Type" type="text" visible="false" />
+		<setting id="dev16Playing" type="labelenum" label="31046" default="off" values="on|off" visible="eq(-1,switch)+eq(-50,true)+gt(-51,16)" />
+		<setting id="dev16Playing" type="labelenum" label="31046" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-51,true)+gt(-52,16)" />
+		<setting id="dev17Type" type="text" visible="false" />
+		<setting id="dev17Playing" type="labelenum" label="31047" default="off" values="on|off" visible="eq(-1,switch)+eq(-53,true)+gt(-54,17)" />
+		<setting id="dev17Playing" type="labelenum" label="31047" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-54,true)+gt(-55,17)" />
+		<setting id="dev18Type" type="text" visible="false" />
+		<setting id="dev18Playing" type="labelenum" label="31048" default="off" values="on|off" visible="eq(-1,switch)+eq(-56,true)+gt(-57,18)" />
+		<setting id="dev18Playing" type="labelenum" label="31048" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-57,true)+gt(-58,18)" />
+		<setting id="dev19Type" type="text" visible="false" />
+		<setting id="dev19Playing" type="labelenum" label="31049" default="off" values="on|off" visible="eq(-1,switch)+eq(-59,true)+gt(-60,19)" />
+		<setting id="dev19Playing" type="labelenum" label="31049" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-60,true)+gt(-61,19)" />
+		<setting id="dev20Type" type="text" visible="false" />
+		<setting id="dev20Playing" type="labelenum" label="31050" default="off" values="on|off" visible="eq(-1,switch)+eq(-62,true)+gt(-63,20)" />
+		<setting id="dev20Playing" type="labelenum" label="31050" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-63,true)+gt(-64,20)" />
+		<setting id="dev21Type" type="text" visible="false" />
+		<setting id="dev21Playing" type="labelenum" label="31051" default="off" values="on|off" visible="eq(-1,switch)+eq(-65,true)+gt(-66,21)" />
+		<setting id="dev21Playing" type="labelenum" label="31051" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-66,true)+gt(-67,21)" />
+		<setting id="dev22Type" type="text" visible="false" />
+		<setting id="dev22Playing" type="labelenum" label="31052" default="off" values="on|off" visible="eq(-1,switch)+eq(-68,true)+gt(-69,22)" />
+		<setting id="dev22Playing" type="labelenum" label="31052" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-69,true)+gt(-70,22)" />
+		<setting id="dev23Type" type="text" visible="false" />
+		<setting id="dev23Playing" type="labelenum" label="31053" default="off" values="on|off" visible="eq(-1,switch)+eq(-71,true)+gt(-72,23)" />
+		<setting id="dev23Playing" type="labelenum" label="31053" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-72,true)+gt(-73,23)" />
+		<setting id="dev24Type" type="text" visible="false" />
+		<setting id="dev24Playing" type="labelenum" label="31054" default="off" values="on|off" visible="eq(-1,switch)+eq(-74,true)+gt(-75,24)" />
+		<setting id="dev24Playing" type="labelenum" label="31054" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-75,true)+gt(-76,24)" />
+		<setting id="dev25Type" type="text" visible="false" />
+		<setting id="dev25Playing" type="labelenum" label="31055" default="off" values="on|off" visible="eq(-1,switch)+eq(-77,true)+gt(-78,25)" />
+		<setting id="dev25Playing" type="labelenum" label="31055" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-78,true)+gt(-79,25)" />
+		<setting id="dev26Type" type="text" visible="false" />
+		<setting id="dev26Playing" type="labelenum" label="31056" default="off" values="on|off" visible="eq(-1,switch)+eq(-80,true)+gt(-81,26)" />
+		<setting id="dev26Playing" type="labelenum" label="31056" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-81,true)+gt(-82,26)" />
+		<setting id="dev27Type" type="text" visible="false" />
+		<setting id="dev27Playing" type="labelenum" label="31057" default="off" values="on|off" visible="eq(-1,switch)+eq(-83,true)+gt(-84,27)" />
+		<setting id="dev27Playing" type="labelenum" label="31057" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-84,true)+gt(-85,27)" />
+		<setting id="dev28Type" type="text" visible="false" />
+		<setting id="dev28Playing" type="labelenum" label="31058" default="off" values="on|off" visible="eq(-1,switch)+eq(-86,true)+gt(-87,28)" />
+		<setting id="dev28Playing" type="labelenum" label="31058" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-87,true)+gt(-88,28)" />
+		<setting id="dev29Type" type="text" visible="false" />
+		<setting id="dev29Playing" type="labelenum" label="31059" default="off" values="on|off" visible="eq(-1,switch)+eq(-89,true)+gt(-90,29)" />
+		<setting id="dev29Playing" type="labelenum" label="31059" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-90,true)+gt(-91,29)" />
+		<setting id="dev30Type" type="text" visible="false" />
+		<setting id="dev30Playing" type="labelenum" label="31060" default="off" values="on|off" visible="eq(-1,switch)+eq(-92,true)+gt(-93,30)" />
+		<setting id="dev30Playing" type="labelenum" label="31060" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-93,true)+gt(-94,30)" />
+		<setting id="dev31Type" type="text" visible="false" />
+		<setting id="dev31Playing" type="labelenum" label="31061" default="off" values="on|off" visible="eq(-1,switch)+eq(-95,true)+gt(-96,31)" />
+		<setting id="dev31Playing" type="labelenum" label="31061" default="0" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-96,true)+gt(-97,31)" />
+	</category -->
+
+	<!-- Paused -->
+	<!-- category label="31024">
+		<setting id="deviceCount" type="number" visible="false" />
+		<setting id="playbackAutomation" type="bool" visible="false" />
+		<setting id="automatePausedDisabled" label="31027" type="text" visible="eq(-1,false)" />
+		<setting id="dev0Type" type="text" visible="false" />
+		<setting id="dev0Paused" type="labelenum" label="31030" default="off" values="on|off" visible="eq(-1,switch)+eq(-3,true)+gt(-4,0)" />
+		<setting id="dev0Paused" type="labelenum" label="31030" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-4,true)+gt(-5,0)" />
+		<setting id="dev1Type" type="text" visible="false" />
+		<setting id="dev1Paused" type="labelenum" label="31031" default="off" values="on|off" visible="eq(-1,switch)+eq(-6,true)+gt(-7,1)" />
+		<setting id="dev1Paused" type="labelenum" label="31031" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-7,true)+gt(-8,1)" />
+		<setting id="dev2Type" type="text" visible="false" />
+		<setting id="dev2Paused" type="labelenum" label="31032" default="off" values="on|off" visible="eq(-1,switch)+eq(-9,true)+gt(-10,2)" />
+		<setting id="dev2Paused" type="labelenum" label="31032" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer+eq(-10,true)+gt(-11,2))" />
+		<setting id="dev3Type" type="text" visible="false" />
+		<setting id="dev3Paused" type="labelenum" label="31033" default="off" values="on|off" visible="eq(-1,switch)+eq(-12,true)+gt(-13,3)" />
+		<setting id="dev3Paused" type="labelenum" label="31033" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-13,true)+gt(-14,3)" />
+		<setting id="dev4Type" type="text" visible="false" />
+		<setting id="dev4Paused" type="labelenum" label="31034" default="off" values="on|off" visible="eq(-1,switch)+eq(-15,true)+gt(-16,4)" />
+		<setting id="dev4Paused" type="labelenum" label="31034" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-16,true)+gt(-17,4)" />
+		<setting id="dev5Type" type="text" visible="false" />
+		<setting id="dev5Paused" type="labelenum" label="31035" default="off" values="on|off" visible="eq(-1,switch)+eq(-18,true)+gt(-19,5)" />
+		<setting id="dev5Paused" type="labelenum" label="31035" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-19,true)+gt(-20,5)" />
+		<setting id="dev6Type" type="text" visible="false" />
+		<setting id="dev6Paused" type="labelenum" label="31036" default="off" values="on|off" visible="eq(-1,switch)+eq(-21,true)+gt(-22,6)" />
+		<setting id="dev6Paused" type="labelenum" label="31036" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-22,true)+gt(-23,6)" />
+		<setting id="dev7Type" type="text" visible="false" />
+		<setting id="dev7Paused" type="labelenum" label="31037" default="off" values="on|off" visible="eq(-1,switch)+eq(-24,true)+gt(-25,7)" />
+		<setting id="dev7Paused" type="labelenum" label="31037" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-25,true)+gt(-26,7)" />
+		<setting id="dev8Type" type="text" visible="false" />
+		<setting id="dev8Paused" type="labelenum" label="31038" default="off" values="on|off" visible="eq(-1,switch)+eq(-27,true)+gt(-28,8)" />
+		<setting id="dev8Paused" type="labelenum" label="31038" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-28,true)+gt(-29,8)" />
+		<setting id="dev9Type" type="text" visible="false" />
+		<setting id="dev9Paused" type="labelenum" label="31039" default="off" values="on|off" visible="eq(-1,switch)+eq(-30,true)+gt(-31,9)" />
+		<setting id="dev9Paused" type="labelenum" label="31039" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-31,true)+gt(-32,9)" />
+		<setting id="dev10Type" type="text" visible="false" />
+		<setting id="dev10Paused" type="labelenum" label="31040" default="off" values="on|off" visible="eq(-1,switch)+eq(-33,true)+gt(-34,10)" />
+		<setting id="dev10Paused" type="labelenum" label="31040" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-34,true)+gt(-35,10)" />
+		<setting id="dev11Type" type="text" visible="false" />
+		<setting id="dev11Paused" type="labelenum" label="31041" default="off" values="on|off" visible="eq(-1,switch)+eq(-36,true)+gt(-37,11)" />
+		<setting id="dev11Paused" type="labelenum" label="31041" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-37,true)+gt(-38,11)" />
+		<setting id="dev12Type" type="text" visible="false" />
+		<setting id="dev12Paused" type="labelenum" label="31042" default="off" values="on|off" visible="eq(-1,switch)+eq(-39,true)+gt(-40,12)" />
+		<setting id="dev12Paused" type="labelenum" label="31042" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-40,true)+gt(-41,11)" />
+		<setting id="dev13Type" type="text" visible="false" />
+		<setting id="dev13Paused" type="labelenum" label="31043" default="off" values="on|off" visible="eq(-1,switch)+eq(-42,true)+gt(-43,13)" />
+		<setting id="dev13Paused" type="labelenum" label="31043" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-43,true)+gt(-44,13)" />
+		<setting id="dev14Type" type="text" visible="false" />
+		<setting id="dev14Paused" type="labelenum" label="31044" default="off" values="on|off" visible="eq(-1,switch)+eq(-44,true)+gt(-45,14)" />
+		<setting id="dev14Paused" type="labelenum" label="31044" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-45,true)+gt(-46,14)" />
+		<setting id="dev15Type" type="text" visible="false" />
+		<setting id="dev15Paused" type="labelenum" label="31045" default="off" values="on|off" visible="eq(-1,switch)+eq(-47,true)+gt(-48,15)" />
+		<setting id="dev15Paused" type="labelenum" label="31045" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-48,true)+gt(-49,15)" />
+		<setting id="dev16Type" type="text" visible="false" />
+		<setting id="dev16Paused" type="labelenum" label="31046" default="off" values="on|off" visible="eq(-1,switch)+eq(-50,true)+gt(-51,16)" />
+		<setting id="dev16Paused" type="labelenum" label="31046" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-51,true)+gt(-52,16)" />
+		<setting id="dev17Type" type="text" visible="false" />
+		<setting id="dev17Paused" type="labelenum" label="31047" default="off" values="on|off" visible="eq(-1,switch)+eq(-53,true)+gt(-54,17)" />
+		<setting id="dev17Paused" type="labelenum" label="31047" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-54,true)+gt(-55,17)" />
+		<setting id="dev18Type" type="text" visible="false" />
+		<setting id="dev18Paused" type="labelenum" label="31048" default="off" values="on|off" visible="eq(-1,switch)+eq(-56,true)+gt(-57,18)" />
+		<setting id="dev18Paused" type="labelenum" label="31048" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-57,true)+gt(-58,18)" />
+		<setting id="dev19Type" type="text" visible="false" />
+		<setting id="dev19Paused" type="labelenum" label="31049" default="off" values="on|off" visible="eq(-1,switch)+eq(-59,true)+gt(-60,19)" />
+		<setting id="dev19Paused" type="labelenum" label="31049" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-60,true)+gt(-61,19)" />
+		<setting id="dev20Type" type="text" visible="false" />
+		<setting id="dev20Paused" type="labelenum" label="31050" default="off" values="on|off" visible="eq(-1,switch)+eq(-62,true)+gt(-63,20)" />
+		<setting id="dev20Paused" type="labelenum" label="31050" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-63,true)+gt(-64,20)" />
+		<setting id="dev21Type" type="text" visible="false" />
+		<setting id="dev21Paused" type="labelenum" label="31051" default="off" values="on|off" visible="eq(-1,switch)+eq(-65,true)+gt(-66,21)" />
+		<setting id="dev21Paused" type="labelenum" label="31051" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-66,true)+gt(-67,21)" />
+		<setting id="dev22Type" type="text" visible="false" />
+		<setting id="dev22Paused" type="labelenum" label="31052" default="off" values="on|off" visible="eq(-1,switch)+eq(-68,true)+gt(-69,22)" />
+		<setting id="dev22Paused" type="labelenum" label="31052" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-69,true)+gt(-70,22)" />
+		<setting id="dev23Type" type="text" visible="false" />
+		<setting id="dev23Paused" type="labelenum" label="31053" default="off" values="on|off" visible="eq(-1,switch)+eq(-71,true)+gt(-72,23)" />
+		<setting id="dev23Paused" type="labelenum" label="31053" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-72,true)+gt(-73,23)" />
+		<setting id="dev24Type" type="text" visible="false" />
+		<setting id="dev24Paused" type="labelenum" label="31054" default="off" values="on|off" visible="eq(-1,switch)+eq(-74,true)+gt(-75,24)" />
+		<setting id="dev24Paused" type="labelenum" label="31054" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-75,true)+gt(-76,24)" />
+		<setting id="dev25Type" type="text" visible="false" />
+		<setting id="dev25Paused" type="labelenum" label="31055" default="off" values="on|off" visible="eq(-1,switch)+eq(-77,true)+gt(-78,25)" />
+		<setting id="dev25Paused" type="labelenum" label="31055" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-78,true)+gt(-79,25)" />
+		<setting id="dev26Type" type="text" visible="false" />
+		<setting id="dev26Paused" type="labelenum" label="31056" default="off" values="on|off" visible="eq(-1,switch)+eq(-80,true)+gt(-81,26)" />
+		<setting id="dev26Paused" type="labelenum" label="31056" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-81,true)+gt(-82,26)" />
+		<setting id="dev27Type" type="text" visible="false" />
+		<setting id="dev27Paused" type="labelenum" label="31057" default="off" values="on|off" visible="eq(-1,switch)+eq(-83,true)+gt(-84,27)" />
+		<setting id="dev27Paused" type="labelenum" label="31057" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-84,true)+gt(-85,27)" />
+		<setting id="dev28Type" type="text" visible="false" />
+		<setting id="dev28Paused" type="labelenum" label="31058" default="off" values="on|off" visible="eq(-1,switch)+eq(-86,true)+gt(-87,28)" />
+		<setting id="dev28Paused" type="labelenum" label="31058" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-87,true)+gt(-88,28)" />
+		<setting id="dev29Type" type="text" visible="false" />
+		<setting id="dev29Paused" type="labelenum" label="31059" default="off" values="on|off" visible="eq(-1,switch)+eq(-89,true)+gt(-90,29)" />
+		<setting id="dev29Paused" type="labelenum" label="31059" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-90,true)+gt(-91,29)" />
+		<setting id="dev30Type" type="text" visible="false" />
+		<setting id="dev30Paused" type="labelenum" label="31060" default="off" values="on|off" visible="eq(-1,switch)+eq(-92,true)+gt(-93,30)" />
+		<setting id="dev30Paused" type="labelenum" label="31060" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-93,true)+gt(-94,30)" />
+		<setting id="dev31Type" type="text" visible="false" />
+		<setting id="dev31Paused" type="labelenum" label="31061" default="off" values="on|off" visible="eq(-1,switch)+eq(-95,true)+gt(-96,31)" />
+		<setting id="dev31Paused" type="labelenum" label="31061" default="0" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-96,true)+gt(-97,31)" />
+	</category -->
+
+	<!-- Stopped -->
+	<!-- category label="31025">
+		<setting id="deviceCount" type="number" visible="false" />
+		<setting id="playbackAutomation" type="bool" visible="false" />
+		<setting id="automateStoppedDisabled" label="31027" type="text" visible="eq(-1,false)" />
+		<setting id="dev0Type" type="text" visible="false" />
+		<setting id="dev0Stopped" type="labelenum" label="31030" default="off" values="on|off" visible="eq(-1,switch)+eq(-3,true)+gt(-4,0)" />
+		<setting id="dev0Stopped" type="labelenum" label="31030" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-4,true)+gt(-5,0)" />
+		<setting id="dev1Type" type="text" visible="false" />
+		<setting id="dev1Stopped" type="labelenum" label="31031" default="off" values="on|off" visible="eq(-1,switch)+eq(-6,true)+gt(-7,1)" />
+		<setting id="dev1Stopped" type="labelenum" label="31031" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-7,true)+gt(-8,1)" />
+		<setting id="dev2Type" type="text" visible="false" />
+		<setting id="dev2Stopped" type="labelenum" label="31032" default="off" values="on|off" visible="eq(-1,switch)+eq(-9,true)+gt(-10,2)" />
+		<setting id="dev2Stopped" type="labelenum" label="31032" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer+eq(-10,true)+gt(-11,2))" />
+		<setting id="dev3Type" type="text" visible="false" />
+		<setting id="dev3Stopped" type="labelenum" label="31033" default="off" values="on|off" visible="eq(-1,switch)+eq(-12,true)+gt(-13,3)" />
+		<setting id="dev3Stopped" type="labelenum" label="31033" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-13,true)+gt(-14,3)" />
+		<setting id="dev4Type" type="text" visible="false" />
+		<setting id="dev4Stopped" type="labelenum" label="31034" default="off" values="on|off" visible="eq(-1,switch)+eq(-15,true)+gt(-16,4)" />
+		<setting id="dev4Stopped" type="labelenum" label="31034" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-16,true)+gt(-17,4)" />
+		<setting id="dev5Type" type="text" visible="false" />
+		<setting id="dev5Stopped" type="labelenum" label="31035" default="off" values="on|off" visible="eq(-1,switch)+eq(-18,true)+gt(-19,5)" />
+		<setting id="dev5Stopped" type="labelenum" label="31035" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-19,true)+gt(-20,5)" />
+		<setting id="dev6Type" type="text" visible="false" />
+		<setting id="dev6Stopped" type="labelenum" label="31036" default="off" values="on|off" visible="eq(-1,switch)+eq(-21,true)+gt(-22,6)" />
+		<setting id="dev6Stopped" type="labelenum" label="31036" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-22,true)+gt(-23,6)" />
+		<setting id="dev7Type" type="text" visible="false" />
+		<setting id="dev7Stopped" type="labelenum" label="31037" default="off" values="on|off" visible="eq(-1,switch)+eq(-24,true)+gt(-25,7)" />
+		<setting id="dev7Stopped" type="labelenum" label="31037" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-25,true)+gt(-26,7)" />
+		<setting id="dev8Type" type="text" visible="false" />
+		<setting id="dev8Stopped" type="labelenum" label="31038" default="off" values="on|off" visible="eq(-1,switch)+eq(-27,true)+gt(-28,8)" />
+		<setting id="dev8Stopped" type="labelenum" label="31038" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-28,true)+gt(-29,8)" />
+		<setting id="dev9Type" type="text" visible="false" />
+		<setting id="dev9Stopped" type="labelenum" label="31039" default="off" values="on|off" visible="eq(-1,switch)+eq(-30,true)+gt(-31,9)" />
+		<setting id="dev9Stopped" type="labelenum" label="31039" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-31,true)+gt(-32,9)" />
+		<setting id="dev10Type" type="text" visible="false" />
+		<setting id="dev10Stopped" type="labelenum" label="31040" default="off" values="on|off" visible="eq(-1,switch)+eq(-33,true)+gt(-34,10)" />
+		<setting id="dev10Stopped" type="labelenum" label="31040" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-34,true)+gt(-35,10)" />
+		<setting id="dev11Type" type="text" visible="false" />
+		<setting id="dev11Stopped" type="labelenum" label="31041" default="off" values="on|off" visible="eq(-1,switch)+eq(-36,true)+gt(-37,11)" />
+		<setting id="dev11Stopped" type="labelenum" label="31041" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-37,true)+gt(-38,11)" />
+		<setting id="dev12Type" type="text" visible="false" />
+		<setting id="dev12Stopped" type="labelenum" label="31042" default="off" values="on|off" visible="eq(-1,switch)+eq(-39,true)+gt(-40,12)" />
+		<setting id="dev12Stopped" type="labelenum" label="31042" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-40,true)+gt(-41,11)" />
+		<setting id="dev13Type" type="text" visible="false" />
+		<setting id="dev13Stopped" type="labelenum" label="31043" default="off" values="on|off" visible="eq(-1,switch)+eq(-42,true)+gt(-43,13)" />
+		<setting id="dev13Stopped" type="labelenum" label="31043" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-43,true)+gt(-44,13)" />
+		<setting id="dev14Type" type="text" visible="false" />
+		<setting id="dev14Stopped" type="labelenum" label="31044" default="off" values="on|off" visible="eq(-1,switch)+eq(-44,true)+gt(-45,14)" />
+		<setting id="dev14Stopped" type="labelenum" label="31044" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-45,true)+gt(-46,14)" />
+		<setting id="dev15Type" type="text" visible="false" />
+		<setting id="dev15Stopped" type="labelenum" label="31045" default="off" values="on|off" visible="eq(-1,switch)+eq(-47,true)+gt(-48,15)" />
+		<setting id="dev15Stopped" type="labelenum" label="31045" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-48,true)+gt(-49,15)" />
+		<setting id="dev16Type" type="text" visible="false" />
+		<setting id="dev16Stopped" type="labelenum" label="31046" default="off" values="on|off" visible="eq(-1,switch)+eq(-50,true)+gt(-51,16)" />
+		<setting id="dev16Stopped" type="labelenum" label="31046" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-51,true)+gt(-52,16)" />
+		<setting id="dev17Type" type="text" visible="false" />
+		<setting id="dev17Stopped" type="labelenum" label="31047" default="off" values="on|off" visible="eq(-1,switch)+eq(-53,true)+gt(-54,17)" />
+		<setting id="dev17Stopped" type="labelenum" label="31047" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-54,true)+gt(-55,17)" />
+		<setting id="dev18Type" type="text" visible="false" />
+		<setting id="dev18Stopped" type="labelenum" label="31048" default="off" values="on|off" visible="eq(-1,switch)+eq(-56,true)+gt(-57,18)" />
+		<setting id="dev18Stopped" type="labelenum" label="31048" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-57,true)+gt(-58,18)" />
+		<setting id="dev19Type" type="text" visible="false" />
+		<setting id="dev19Stopped" type="labelenum" label="31049" default="off" values="on|off" visible="eq(-1,switch)+eq(-59,true)+gt(-60,19)" />
+		<setting id="dev19Stopped" type="labelenum" label="31049" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-60,true)+gt(-61,19)" />
+		<setting id="dev20Type" type="text" visible="false" />
+		<setting id="dev20Stopped" type="labelenum" label="31050" default="off" values="on|off" visible="eq(-1,switch)+eq(-62,true)+gt(-63,20)" />
+		<setting id="dev20Stopped" type="labelenum" label="31050" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-63,true)+gt(-64,20)" />
+		<setting id="dev21Type" type="text" visible="false" />
+		<setting id="dev21Stopped" type="labelenum" label="31051" default="off" values="on|off" visible="eq(-1,switch)+eq(-65,true)+gt(-66,21)" />
+		<setting id="dev21Stopped" type="labelenum" label="31051" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-66,true)+gt(-67,21)" />
+		<setting id="dev22Type" type="text" visible="false" />
+		<setting id="dev22Stopped" type="labelenum" label="31052" default="off" values="on|off" visible="eq(-1,switch)+eq(-68,true)+gt(-69,22)" />
+		<setting id="dev22Stopped" type="labelenum" label="31052" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-69,true)+gt(-70,22)" />
+		<setting id="dev23Type" type="text" visible="false" />
+		<setting id="dev23Stopped" type="labelenum" label="31053" default="off" values="on|off" visible="eq(-1,switch)+eq(-71,true)+gt(-72,23)" />
+		<setting id="dev23Stopped" type="labelenum" label="31053" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-72,true)+gt(-73,23)" />
+		<setting id="dev24Type" type="text" visible="false" />
+		<setting id="dev24Stopped" type="labelenum" label="31054" default="off" values="on|off" visible="eq(-1,switch)+eq(-74,true)+gt(-75,24)" />
+		<setting id="dev24Stopped" type="labelenum" label="31054" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-75,true)+gt(-76,24)" />
+		<setting id="dev25Type" type="text" visible="false" />
+		<setting id="dev25Stopped" type="labelenum" label="31055" default="off" values="on|off" visible="eq(-1,switch)+eq(-77,true)+gt(-78,25)" />
+		<setting id="dev25Stopped" type="labelenum" label="31055" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-78,true)+gt(-79,25)" />
+		<setting id="dev26Type" type="text" visible="false" />
+		<setting id="dev26Stopped" type="labelenum" label="31056" default="off" values="on|off" visible="eq(-1,switch)+eq(-80,true)+gt(-81,26)" />
+		<setting id="dev26Stopped" type="labelenum" label="31056" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-81,true)+gt(-82,26)" />
+		<setting id="dev27Type" type="text" visible="false" />
+		<setting id="dev27Stopped" type="labelenum" label="31057" default="off" values="on|off" visible="eq(-1,switch)+eq(-83,true)+gt(-84,27)" />
+		<setting id="dev27Stopped" type="labelenum" label="31057" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-84,true)+gt(-85,27)" />
+		<setting id="dev28Type" type="text" visible="false" />
+		<setting id="dev28Stopped" type="labelenum" label="31058" default="off" values="on|off" visible="eq(-1,switch)+eq(-86,true)+gt(-87,28)" />
+		<setting id="dev28Stopped" type="labelenum" label="31058" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-87,true)+gt(-88,28)" />
+		<setting id="dev29Type" type="text" visible="false" />
+		<setting id="dev29Stopped" type="labelenum" label="31059" default="off" values="on|off" visible="eq(-1,switch)+eq(-89,true)+gt(-90,29)" />
+		<setting id="dev29Stopped" type="labelenum" label="31059" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-90,true)+gt(-91,29)" />
+		<setting id="dev30Type" type="text" visible="false" />
+		<setting id="dev30Stopped" type="labelenum" label="31060" default="off" values="on|off" visible="eq(-1,switch)+eq(-92,true)+gt(-93,30)" />
+		<setting id="dev30Stopped" type="labelenum" label="31060" default="off" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-93,true)+gt(-94,30)" />
+		<setting id="dev31Type" type="text" visible="false" />
+		<setting id="dev31Stopped" type="labelenum" label="31061" default="off" values="on|off" visible="eq(-1,switch)+eq(-95,true)+gt(-96,31)" />
+		<setting id="dev31Stopped" type="labelenum" label="31061" default="0" values="off|12.5%|25%|37.5%|50%|62.5%|75%|87.5%|100%" visible="eq(-2,dimmer)+eq(-96,true)+gt(-97,31)" />
+	</category -->
 	
 </settings>

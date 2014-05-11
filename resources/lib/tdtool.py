@@ -59,14 +59,23 @@ TELLSTICK_DOWN = 256
 
 SUPPORTED_METHODS = TELLSTICK_TURNON | TELLSTICK_TURNOFF | TELLSTICK_BELL | TELLSTICK_DIM | TELLSTICK_UP | TELLSTICK_DOWN;
 
-def runCmd(cmd):
+def runCmd(cmd, args):
 	debug.log("runCmd("+ cmd +")")
-	if sys.platform == 'darwin':
-		return os.system(cmd)
-	else:
-		p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-		output, error = p.communicate()
-		return output
+	#arg = args.split()
+	#for i in arg:
+	#	cmd = cmd+","+i
+	#return subprocess.call(cmd.split(","))
+	
+	if sys.platform == 'linux2':
+		message("tdtool on Linux not functional ","The python engine XBMC uses on Linux does not support\nsystem level commands. Please feel free to contribue.")
+		return "-1"
+	if sys.platform == 'darwin' :
+		message("tdtool on Mac OSX not functional ","The python engine XBMC uses on Mac OSX does not support\nsystem level commands. Please feel free to contribue.")
+		return "-1"
+
+	p = subprocess.Popen(cmd+" "+args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+	output, error = p.communicate()
+	return output
 
 def doDevice(source, deviceId, methodId, methodValue=0):
 	debug.log("doDevice(" + source +", "+ str(deviceId) +", "+ str(methodId) +", "+ str(methodValue)+")")
@@ -80,22 +89,22 @@ def doDevice(source, deviceId, methodId, methodValue=0):
 def listDevices_local():
 	debug.log("listDevices_local()")
 	devices = []
-	output = runCmd(TELLDUS_EXE + " --list ")
+	output = runCmd(TELLDUS_EXE, "--list")
 	devices = output.splitlines()
 	devices.pop(len(devices)-1)
 	devices[0] = str(len(devices)-1)
-	for i in range(len(devices)):
-		xbmc.log(str(i) +": "+ str(devices[i]))
+	#for i in range(len(devices)):
+	#	xbmc.log(str(i) +": "+ str(devices[i]))
 	return devices
 
 def doMethod_local(deviceId, methodId, methodValue = 0):
 	debug.log("doMethod_local("+ str(deviceId) +", "+ str(methodId) +", "+ str(methodValue) +")")
 	if (methodId == TELLSTICK_TURNON):
-		runCmd(TELLDUS_EXE + " --on " + deviceId)
+		runCmd(TELLDUS_EXE, " --on "+ str(deviceId) )
 	elif (methodId == TELLSTICK_TURNOFF):
-		runCmd(TELLDUS_EXE + " --off " + deviceId)
+		runCmd(TELLDUS_EXE, " --off " + str(deviceId) )
 	elif (methodId == TELLSTICK_DIM):
-		runCmd(TELLDUS_EXE + " --dimlevel " + str(methodValue) + " --dim " + deviceId)
+		runCmd(TELLDUS_EXE, " --dimlevel " + str(methodValue) + " --dim " + str(deviceId) )
 	return "success"
 
 def listDevices():

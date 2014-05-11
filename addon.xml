@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.program.terra" name="Terra" version="0.0.2" provider-name="Espen Krangnes">
+<addon id="plugin.program.terra" name="Terra" version="0.1.0" provider-name="Espen Krangnes">
   <requires>
-    <import addon="xbmc.python" version="2.0"/>
+    <import addon="xbmc.python" version="2.6"/>
    </requires>
   <extension point="xbmc.python.pluginsource" library="default.py" start="login">
 	<provides>executable</provides>
   </extension>
-  <extension point="xbmc.service" library="resources/lib/daemon.py" start="login">
-  </extension>
+  <!-- extension point="xbmc.service" library="resources/lib/daemon_video_automation.py" start="login">
+  </extension -->
   <extension point="xbmc.addon.metadata">
     <summary>Home automation for Telldus products</summary>
-	<description>Telldus XBMC plugin, both USB sticks and Net devices are supported as well as local tdtool executable and Telldus Live!.[CR][CR]For a local tdtool binary, you will need to configure the path to the binary in the addon settings, while for Telldus Live! you will need to veryfy both keys and tokens to access your devices. To utilize the Telldus Live! devices, make sure you complete the entire setup process. For both options the Advanvced pane can be used to configure individual devices.[CR][CR]There is a limitation of 8 devices total; the first 8 returned is used upon automated setup. Look in the xbmc.log for excess devices and the advanced tab in the settings if you'd like to shuffle things around.[CR][CR]To use the program interface, use up/down to select the device, left/right to change value and press enter to apply. The design is intended to work with remotes.</description>
+	<description>XBMC addon that supports both Telldus USB sticks and Telldus Net. The addon will read the devices from your local tdtool configuration or Telldus Live! account and access them. To configure your respective devices with either one of the two options, please use setup provided with the respective tool.
+		[CR]For a local tdtool binary, you will need to configure the path to the binary in the addon settings, while for Telldus Live! you will need to veryfy both keys and tokens to access your devices. To utilize the Telldus Live! devices, make sure you complete the entire setup process. There is also a debug trace function which enables internal tracing and writes it to the XBMC log.
+		[CR]To use the program interface, use left/right to sroll through the devices, up/down to change value and press enter to apply. If quick mode is enabled, the new value will automatically be applied without the need to press enter. The design is designed for remotes and keyboards. No special design considerations for mice is taken, besides the option to close the addon.
+		[CR]Project homepage: https://code.google.com/p/plugin-program-terra/
+	</description>
 	<platform>all</platform>
   </extension>
 </addon>
